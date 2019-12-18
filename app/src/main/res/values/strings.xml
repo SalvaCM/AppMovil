@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AlojamientosEuskadi</string>
+    <string name="descripcion_foto">Descripcion FOTO</string>
+    <string name="eslogan_aqui">ESLOGAN AQUI</string>
 </resources>
