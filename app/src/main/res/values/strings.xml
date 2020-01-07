@@ -1,5 +1,32 @@
 <resources>
+    <!-- Strings del menu Inicio -->
     <string name="app_name">AlojamientosEuskadi</string>
     <string name="descripcion_foto">Descripcion FOTO</string>
     <string name="eslogan_aqui">ESLOGAN AQUI</string>
+
+    <!-- Strings del menu ActionBAr -->
+    <string name="opcion_menu1">Ver alojamientos</string>
+    <string name="opcion_menu2">Ver reservas</string>
+    <string name="opcion_menu3">Mapa</string>
+    <string name="opcion_menu4">Acerca de</string>
+    <string name="opcion_menu5">Iniciar sesión</string>
+
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Usuario</string>
+    <string name="prompt_password">Contraseña</string>
+    <string name="action_sign_in">Iniciar</string>
+    <string name="action_registrarse">Registarse</string>
+    <string name="action_sign_in_short">Iniciar</string>
+    <string name="welcome">"Bienvenido!"</string>
+    <string name="invalid_username">Introduzca un usuario</string>
+    <string name="invalid_password">Introduzca una contraseña</string>
+    <string name="invalid_password2">La contraseña no es correcta</string>
+    <string name="login_failed">"Error en el Login"</string>
+    <string name="usuario_registrado">"El usuario se registró correctamente "</string>
+    <string name="mensaje_rellenar">"Debe rellenar los campos para continuar"</string>
+    <string name="mensaje_registro">"El registo se realizó correctamente"</string>
+
+    <string name="salir">"Salir"</string>
+
 </resources>
