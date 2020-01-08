@@ -9,6 +9,6 @@ public class Mapa extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa2);
+        setContentView(R.layout.activity_mapa);
     }
 }

@@ -85,7 +85,7 @@ public class Login extends AppCompatActivity {
         Toast toast2=Toast.makeText(getApplicationContext(), "Botón registrarse pulsado", Toast.LENGTH_SHORT);
         toast2.show();
 
-     
+
     }
 
 

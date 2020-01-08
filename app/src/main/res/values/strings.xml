@@ -29,4 +29,9 @@
 
     <string name="salir">"Salir"</string>
 
+    <!-- Strings related to HacerReserva -->
+    <string name="atras">"Atrás"</string>
+    <string name="reservar">"Reservar"</string>
+    <string name="tituloHacerReserv">"Seleccione los detalles de su reserva"</string>
+    <string name="date">"Fecha"</string>
 </resources>

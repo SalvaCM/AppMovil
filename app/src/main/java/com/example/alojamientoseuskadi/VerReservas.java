@@ -9,6 +9,6 @@ public class VerReservas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_reservas2);
+        setContentView(R.layout.activity_ver_reservas);
     }
 }
