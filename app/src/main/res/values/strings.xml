@@ -34,4 +34,6 @@
     <string name="reservar">"Reservar"</string>
     <string name="tituloHacerReserv">"Seleccione los detalles de su reserva"</string>
     <string name="date">"Fecha"</string>
+    <string name="strFechaEntrada">"Fecha de entrada:"</string>
+    <string name="strFechaSalida">"Fecha de salida:"</string>
 </resources>

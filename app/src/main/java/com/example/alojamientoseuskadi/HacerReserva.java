@@ -15,44 +15,85 @@ import java.util.Locale;
 
 public class HacerReserva extends AppCompatActivity {
 
-    EditText etBirthday;
-    Calendar calendario = Calendar.getInstance();
+    EditText etFechaEntrada;
+    EditText etFechaSalida;
+    Calendar calendarioEntrada = Calendar.getInstance();
+    Calendar calendarioSalida = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_reserva);
 
-        etBirthday = findViewById(R.id.etBirthday);
-        etBirthday.setOnClickListener(new View.OnClickListener() {
+        //Fecha de entrada:
+        etFechaEntrada = findViewById(R.id.fechaEntrada);
+        etFechaEntrada.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(HacerReserva.this, date, calendario
-                        .get(Calendar.YEAR), calendario.get(Calendar.MONTH),
-                        calendario.get(Calendar.DAY_OF_MONTH)).show();
+                new DatePickerDialog(HacerReserva.this, date, calendarioEntrada
+                        .get(Calendar.YEAR), calendarioEntrada.get(Calendar.MONTH),
+                        calendarioEntrada.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        //Fecha Salida:
+        etFechaSalida = findViewById(R.id.fechaSalida);
+        etFechaSalida.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(HacerReserva.this, date, calendarioSalida
+                        .get(Calendar.YEAR), calendarioSalida.get(Calendar.MONTH),
+                        calendarioSalida.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
     }
 
+    //fechaEntrada
     DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
         @Override
         public void onDateSet(DatePicker view, int year, int monthOfYear,
                               int dayOfMonth) {
             // TODO Auto-generated method stub
-            calendario.set(Calendar.YEAR, year);
-            calendario.set(Calendar.MONTH, monthOfYear);
-            calendario.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            calendarioEntrada.set(Calendar.YEAR, year);
+            calendarioEntrada.set(Calendar.MONTH, monthOfYear);
+            calendarioEntrada.set(Calendar.DAY_OF_MONTH, dayOfMonth);
             actualizarInput();
         }
 
     };
 
+    //fechaSalida
+    DatePickerDialog.OnDateSetListener date2 = new DatePickerDialog.OnDateSetListener() {
+
+        @Override
+        public void onDateSet(DatePicker view, int year, int monthOfYear,
+                              int dayOfMonth) {
+            // TODO Auto-generated method stub
+            calendarioSalida.set(Calendar.YEAR, year);
+            calendarioSalida.set(Calendar.MONTH, monthOfYear);
+            calendarioSalida.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            actualizarInput2();
+        }
+
+    };
+
+    //Fecha entrada
     private void actualizarInput() {
         String formatoDeFecha = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
 
-        etBirthday.setText(sdf.format(calendario.getTime()));
+        etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
+
+    }
+
+    //Fecha Salida
+    private void actualizarInput2() {
+        String formatoDeFecha = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
+
+
+        etFechaSalida.setText(sdf.format(calendarioSalida.getTime()));
     }
 
     //Métodos de los botones
