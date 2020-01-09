@@ -14,11 +14,19 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class HacerReserva extends AppCompatActivity {
-
+    // Declaración de elementos de la actividad.xml
     EditText etFechaEntrada;
     EditText etFechaSalida;
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
+
+    //Declaración de variables
+    String formatoDeFecha = "dd/MM/yyyy"; //In which you need put here
+    SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
+    Toast toastFecha;
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat fechaActual = new SimpleDateFormat("dd/MM/yyyy");
+    SimpleDateFormat horaActual = new SimpleDateFormat("HH:mm:ss ");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,7 @@ public class HacerReserva extends AppCompatActivity {
         etFechaSalida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new DatePickerDialog(HacerReserva.this, date, calendarioSalida
+                new DatePickerDialog(HacerReserva.this, date2, calendarioSalida
                         .get(Calendar.YEAR), calendarioSalida.get(Calendar.MONTH),
                         calendarioSalida.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -80,19 +88,12 @@ public class HacerReserva extends AppCompatActivity {
 
     //Fecha entrada
     private void actualizarInput() {
-        String formatoDeFecha = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
-
-        etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
+       etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
 
     }
 
     //Fecha Salida
     private void actualizarInput2() {
-        String formatoDeFecha = "MM/dd/yy"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
-
-
         etFechaSalida.setText(sdf.format(calendarioSalida.getTime()));
     }
 
@@ -103,7 +104,21 @@ public class HacerReserva extends AppCompatActivity {
     }
 
     public void hacerReserva(View view){
-        Toast toast1 = Toast.makeText(getApplicationContext(), "botón HacerReserva pulsado", Toast.LENGTH_SHORT);
-        toast1.show();
+        String strFechaActual =  fechaActual.format(calendar.getTime());
+
+        if(etFechaEntrada.getText().length()==0){
+            toastFecha = Toast.makeText(getApplicationContext(), "@String/toastErrorFecha1" + etFechaEntrada.getText(), Toast.LENGTH_SHORT);
+        }
+        if(etFechaSalida.getText().length()==0){
+            toastFecha = Toast.makeText(getApplicationContext(), "@String/toastErrorFecha2" + etFechaEntrada.getText(), Toast.LENGTH_SHORT);
+        }
+
+        else{
+            toastFecha = Toast.makeText(getApplicationContext(), "botón HacerReserva pulsado." , Toast.LENGTH_SHORT);
+        }
+
+
+
+        toastFecha.show();
     }
 }

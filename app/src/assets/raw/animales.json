@@ -1,0 +1,27 @@
+[  
+   {  
+      "especie":"Leu00f3n",
+      "descripcion":"El leu00f3n (Panthera leo) es un mamu00edfero carnu00edvoro ...",
+      "imagen":"leon"
+   },
+   {  
+      "especie":"Elefante",
+      "descripcion":"Los elefantes o elefu00e1ntidos (Elephantidae) son ...",
+      "imagen":"elefante"
+   },
+   {  
+      "especie":"Cocodrilo",
+      "descripcion":"Los crocodu00edlidos (Crocodylidae) son una familia de sauru00f3psidos ...",
+      "imagen":"cocodrilo"
+   },
+   {  
+      "especie":"Cebra",
+      "descripcion":"Se conocen como cebra (o zebra, grafu00eda en desuso ) a tres ...",
+      "imagen":"cebra"
+   },
+   {  
+      "especie":"u00c1guila",
+      "descripcion":"El u00e1guila calva (Haliaeetus leucocephalus), tambiu00e9n ...",
+      "imagen":"aguila"
+   }
+]

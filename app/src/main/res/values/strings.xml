@@ -36,4 +36,9 @@
     <string name="date">"Fecha"</string>
     <string name="strFechaEntrada">"Fecha de entrada:"</string>
     <string name="strFechaSalida">"Fecha de salida:"</string>
+
+    <!-- Strings related to HacerReserva: fechas -->
+    <string name="toastErrorFecha1">"Debe introducir una fecha de entrada."</string>
+    <string name="toastErrorFecha2">"Debe introducir una fecha de salida."</string>
+    <string name="toastErrorFecha3">"La fecha de entrada no puede ser anterior a la fecha actual."</string>
 </resources>
