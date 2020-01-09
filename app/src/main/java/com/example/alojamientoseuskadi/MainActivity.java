@@ -18,18 +18,20 @@ public class MainActivity extends AppCompatActivity {
     //pruebas
     private List<Receta> re;
     private ParseJson parse;
+    StringBuilder receta;
     //pruebas
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // Obtener el fichero json desde la carpeta raw
+
+        //*** LEER JSON: Obtener el fichero json desde la carpeta raw
         InputStream is = getResources().openRawResource(R.raw.entrantes);
         try {
             // re = readJsonStream(is);
             parse = new ParseJson();
-            re = parse.readJsonStream(is);
+            re = parse.readJsonStream(is); //recibe un inputstream con el contenido de nuestro fichero .json y nos devolverá nuestra lista formada.
             System.out.println("Lectura Json terminada");
 
         } catch (IOException e) {
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         TextView et = (TextView) findViewById(R.id.tv_test_json);
 
-        StringBuilder receta = new StringBuilder();
+        receta = new StringBuilder();
         // Recorrer objeto List<Receta> y concatenarlo en una variable para
         // mostrarlo.
         for (Receta r : re) {
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         et.setText(receta);
+        //***FIN LEER JSON: Obtener el fichero json desde la carpeta raw
+
 
     }
 
@@ -66,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.opcion1) {
-            Intent i = new Intent(this,VerAlojamientos.class);
+            Intent i = new Intent(this,Pruebas.class);
             startActivity(i);
         }
         if (id==R.id.opcion2) {

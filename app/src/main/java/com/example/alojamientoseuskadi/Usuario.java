@@ -7,8 +7,15 @@ public class Usuario {
     private String nombre;
     private String apellidos;
     private String contrasena;
-    private List<Usuarios> listaUsuarios;
 
+    public Usuario(String dni, String nombre, String apellidos, String contrasena) {
+        super();
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.contrasena = contrasena;
+
+    }
     public String getDni() {
         return dni;
     }
@@ -31,14 +38,6 @@ public class Usuario {
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public List<Usuarios> getListaUsuarios() {
-        return listaUsuarios;
-    }
-
-    public void setListaUsuarios(List<Usuarios> friends) {
-        this.listaUsuarios = listaUsuarios;
     }
 
     public String getContrasena() {
