@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id==R.id.opcion1) {
-            Intent i = new Intent(this,Pruebas.class);
+            Intent i = new Intent(this,VerAlojamientos.class);
             startActivity(i);
         }
         if (id==R.id.opcion2) {

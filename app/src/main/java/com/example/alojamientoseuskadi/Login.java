@@ -8,10 +8,16 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity {
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
+public class Login extends AppCompatActivity {
+    private List<Usuario> listaUsuarios;
+    private ParseJson parse1;
     private EditText usuario;
     private EditText contrasena;
 
@@ -27,6 +33,36 @@ public class Login extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("datos", Context.MODE_PRIVATE);
         usuario.setText(prefs.getString("usuario", ""));
         contrasena.setText(prefs.getString("contrasena", ""));
+
+
+        //*** LEER JSON: Obtener el fichero json desde la carpeta raw
+        InputStream usu = getResources().openRawResource(R.raw.usuarios);
+        try {
+            // re = readJsonStream(is);
+            parse1 = new ParseJson();
+            listaUsuarios = parse1.readJsonStreamUSUARIO(usu); //recibe un inputstream con el contenido de nuestro fichero .json y nos devolverá nuestra lista formada.
+            System.out.println("Lectura Json terminada");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        TextView et = (TextView) findViewById(R.id.tv_test_json);
+
+        StringBuilder receta = new StringBuilder();
+        // Recorrer objeto List<Receta> y concatenarlo en una variable para
+        // mostrarlo.
+        for (Usuario u : listaUsuarios) {
+            receta.append("\nDni: " + u.getDni());
+            receta.append("\nNombre: " + u.getNombre());
+
+        }
+
+        et.setText(receta);
+        //***FIN LEER JSON: Obtener el fichero json desde la carpeta raw
+
     }
 
     public void iniciar(View view){
