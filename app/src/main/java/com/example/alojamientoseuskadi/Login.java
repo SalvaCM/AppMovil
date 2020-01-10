@@ -52,7 +52,7 @@ public class Login extends AppCompatActivity {
         TextView et = (TextView) findViewById(R.id.tv_test_json);
 
         StringBuilder receta = new StringBuilder();
-        // Recorrer objeto List<Receta> y concatenarlo en una variable para
+        // Recorrer objeto List<Usuario> y concatenarlo en una variable para
         // mostrarlo.
         for (Usuario u : listaUsuarios) {
             receta.append("\nDni: " + u.getDni());
@@ -86,9 +86,14 @@ public class Login extends AppCompatActivity {
 
         //Se comprueba que el usuario y la contraseña introducidos sean correctos
         //Usuario
-        if(preferencias.getString("usuario", "").equals(usuario.getText().toString())){
+        for (Usuario u : listaUsuarios) {
+            notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
+            notificacion.show();
+        if(u.getDni().equals(usuario.getText())){
+            notificacion = Toast.makeText(this, "El usuario SI está en BBDD", Toast.LENGTH_LONG);
+            notificacion.show();
             //contraseña
-            if(preferencias.getString("contrasena", "").equals(contrasena.getText().toString())& contrasena.length()>=1){
+            if(u.getContrasena().equals(contrasena.getText()) & contrasena.length()>=1){
 
                 //Se resetean los datos:
                 usuario.setText("");
@@ -106,7 +111,7 @@ public class Login extends AppCompatActivity {
                 contrasena.setText("");
             }
         }
-        else{
+     /*   else{
             //Se resetean los datos:
             usuario.setText("");
             contrasena.setText("");
@@ -114,7 +119,7 @@ public class Login extends AppCompatActivity {
             notificacion = Toast.makeText(this, R.string.login_failed, Toast.LENGTH_LONG);
             notificacion.show();
         }
-
+*/}
     }
 
     public void registrarse(View view){
