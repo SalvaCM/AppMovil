@@ -6,6 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".VerAlojamientos">
 
+    <TextView
+        android:id="@+id/tv_test_json3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/lv1"
+        android:layout_width="354dp"
+        android:layout_height="606dp"
+        android:layout_marginBottom="84dp"
+        android:clickable="true"
+        android:clipChildren="false"
+        android:divider="#000000"
+        android:dividerHeight="0.5sp"
+        android:listSelector="#CBF5FA"
+        android:longClickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <Button
         android:id="@+id/btnReservar"
         android:layout_width="wrap_content"
@@ -15,8 +40,8 @@
         android:text="@string/reservar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.789"
+        app:layout_constraintHorizontal_bias="0.91"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.888" />
+        app:layout_constraintVertical_bias="0.96" />
 </androidx.constraintlayout.widget.ConstraintLayout>

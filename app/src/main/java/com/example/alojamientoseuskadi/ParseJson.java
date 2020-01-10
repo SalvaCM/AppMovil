@@ -105,4 +105,79 @@ public class ParseJson {
         reader.endObject();
         return new Usuario(dni,nombre, apellidos, contrasena);
     }
+    //FIN LEER USUARIO
+
+    //LEER ALOJAMIENTO
+    //readJsonStream: recibe un inputstream con el contenido de nuestro fichero entremeses.json y nos devolverá nuestra lista formada.
+    public List<Alojamiento> readJsonStreamAlojamiento(InputStream in) throws IOException {
+        JsonReader reader3 = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readAlojamientoArray(reader3);
+        } finally {
+            reader3.close();
+        }
+    }
+
+    //readRecetaArray: este método creará nuestra Lista y será el encargado de añadir cada objeto Receta desde que comienza el array (.beginArray(), que correspondería con el 1º [ de nuestro entremeses.json) hasta el final del array (.endArray(), que correspondería con el último ]).
+    public List<Alojamiento> readAlojamientoArray(JsonReader reader3) throws IOException {
+        List<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
+
+        reader3.beginArray();
+        while (reader3.hasNext()) {
+            listaAlojamientos.add(readAlojamiento(reader3));
+        }
+        reader3.endArray();
+        return listaAlojamientos;
+    }
+
+    //readReceta:  éste método irá recorriendo los atributos entre {}, en nuestro caso: nombre, pueblo e ingredientes e irá creando un objeto de tipo Receta (tipo Alojamiento, Usuario, Reserva) por cada par de llaves {} encontradas y será devuelto al método anteriormente descrito para que sea añadido a la lista.
+    public Alojamiento readAlojamiento(JsonReader reader) throws IOException {
+        int codAlojamiento = 0;
+        String nombre= null;
+        String telefono= null;
+        String tipo = null;
+        String web = null;
+        int capacidad = 0;
+        String descripcion = null;
+        String email = null;
+        String latitud = null;
+        String longitud = null;
+        String localidad = null;
+        String localizacion = null;
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("codAlojamiento")) {
+                codAlojamiento = reader.nextInt();
+            } else if (name.equals("nombre")) {
+                nombre = reader.nextString();
+            } else if (name.equals("telefono")) {
+                telefono = reader.nextString();
+            } else if (name.equals("tipo")) {
+                tipo = reader.nextString();
+            }else if (name.equals("web")) {
+                web = reader.nextString();
+            }else if (name.equals("capacidad")) {
+                capacidad = reader.nextInt();
+            }else if (name.equals("descripcion")) {
+                descripcion = reader.nextString();
+            }else if (name.equals("email")) {
+                email = reader.nextString();
+            }else if (name.equals("latitud")) {
+                latitud = reader.nextString();
+            }else if (name.equals("longitud")) {
+                longitud = reader.nextString();
+            }else if (name.equals("localidad")) {
+                localidad = reader.nextString();
+            }else if (name.equals("localizacion")) {
+                localizacion = reader.nextString();
+            }else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return new Alojamiento(codAlojamiento, nombre, telefono, tipo, web, capacidad, descripcion, email, latitud, longitud, localidad, localizacion) ;
+    }
+    //FIN LEER ALOJAMIENTO
 }

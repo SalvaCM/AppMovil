@@ -14,6 +14,16 @@ public class Alojamiento {
     private String localidad;
     private String localizacion;
 
+    @Override
+    public String toString() {
+        return
+                "Nombre:"+ nombre  +"\n" +
+                "Dirección:"+localizacion + " "+localidad  +"\n" +
+                "Teléfono :" + telefono  +"\n" +
+                "Email :" + email  +"\n" +
+                "Web :" + web;
+    }
+
     public Alojamiento() {
     }
 
