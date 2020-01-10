@@ -20,6 +20,7 @@ public class HacerReserva extends AppCompatActivity {
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
 
+
     //Declaración de variables
     String formatoDeFecha = "dd/MM/yyyy"; //In which you need put here
     SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
@@ -32,6 +33,10 @@ public class HacerReserva extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_reserva);
+
+        //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
+        Bundle datos = this.getIntent().getExtras();
+        String nNombreAlojamiento = datos.getString("nombreAlojamiento");
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);

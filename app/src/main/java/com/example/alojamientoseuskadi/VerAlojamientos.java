@@ -28,7 +28,15 @@ public class VerAlojamientos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_alojamientos);
 
-        //*** LEER JSON: Obtener el fichero json desde la carpeta raw
+        //Se cargan los datos de los alojamientos:
+        cargarDatosAlojamientos();
+
+        //Se muestran los datos de los alojamientos:
+        //listaAlojamientos.clear();
+        mostrarTodosLosAlojamientos();
+    }
+
+    public void cargarDatosAlojamientos(){
         InputStream aloj = getResources().openRawResource(R.raw.alojamientos);
         try {
             // re = readJsonStream(is);
@@ -41,29 +49,11 @@ public class VerAlojamientos extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        TextView et = (TextView) findViewById(R.id.tv_test_json3);
-
-        StringBuilder alojamient = new StringBuilder();
-        // Recorrer objeto List<Usuario> y concatenarlo en una variable para
-        // mostrarlo.
-
-
-
-        //***FIN LEER JSON: Obtener el fichero json desde la carpeta raw
-
-        //ListView
-        //listaAlojamientos.clear();
-        mostrarTodosLosAlojamientos();
     }
 
     public void mostrarTodosLosAlojamientos(){
         lv1 = (ListView)findViewById(R.id.lv1);
-
         registerForContextMenu(lv1);//Se debe “registrar” el ContextMenu , por lo que se añadirá la siguiente línea al método onCreate.
-
-        //MOSTRAR EL CONTENIDO DE SQLite de la tabla tareas3
-
 
        ArrayAdapter<Alojamiento> adapter = new ArrayAdapter<Alojamiento>(this, android.R.layout.simple_list_item_1, listaAlojamientos);
         lv1.setAdapter(adapter);
@@ -87,7 +77,8 @@ public class VerAlojamientos extends AppCompatActivity {
     }
     public void irADetallesHacerReserva(int pos){
         Intent i = new Intent(this, HacerReserva.class);
-         //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
+        // i.putExtra("nombreTarea", listaTareas.get(pos));//para mandar un dato a otra actividad
+       //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
         startActivity(i);
     }
 
