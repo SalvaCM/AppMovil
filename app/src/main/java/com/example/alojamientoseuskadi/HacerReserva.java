@@ -3,6 +3,7 @@ package com.example.alojamientoseuskadi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -15,11 +16,13 @@ import java.util.Locale;
 
 public class HacerReserva extends AppCompatActivity {
     // Declaración de elementos de la actividad.xml
+    EditText txtPruebas;
     EditText etFechaEntrada;
     EditText etFechaSalida;
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
 
+    private String NombAlojSeleccionado;
 
     //Declaración de variables
     String formatoDeFecha = "dd/MM/yyyy"; //In which you need put here
@@ -34,9 +37,13 @@ public class HacerReserva extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_reserva);
 
-        //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
+  /*      //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
         Bundle datos = this.getIntent().getExtras();
-        String nNombreAlojamiento = datos.getString("nombreAlojamiento");
+        String nNombreAlojamiento = datos.getString("nombreAlojSeleccionado");
+        Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nNombreAlojamiento, Toast.LENGTH_SHORT);
+        toast1.show();
+
+   */
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);
@@ -104,8 +111,8 @@ public class HacerReserva extends AppCompatActivity {
 
     //Métodos de los botones
     public void atras(View view){
-        Toast toast1 = Toast.makeText(getApplicationContext(), "botón atras pulsado", Toast.LENGTH_SHORT);
-        toast1.show();
+        Intent i = new Intent(this, VerAlojamientos.class);
+         startActivity(i);
     }
 
     public void hacerReserva(View view){

@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Pruebas"></activity>
+        <activity android:name=".VerReserva"></activity>
+        <activity android:name=".Pruebas" />
         <activity android:name=".HacerReserva" />
         <activity android:name=".Login" />
         <activity android:name=".Mapa" />

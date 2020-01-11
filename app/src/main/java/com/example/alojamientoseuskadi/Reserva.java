@@ -67,4 +67,15 @@ public class Reserva {
     public void setFechaSalida(String fechaSalida) {
         this.fechaSalida = fechaSalida;
     }
+
+    @Override
+    public String toString() {
+        return
+                "codReserva:" + codReserva  +"\n" +
+                "codAlojamiento:" + codAlojamiento  +"\n" +
+                "codUsuario:" + codUsuario +"\n" +
+                "Realizada el: " + fechaRealizada +"\n" +
+                "Fecha reserva:" + fechaEntrada + " - " + fechaSalida +
+                '}';
+    }
 }

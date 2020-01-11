@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,13 +16,19 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VerAlojamientos extends AppCompatActivity {
     private List<Alojamiento> listaAlojamientos;
     private ParseJson parse2;
-    private ListView lv1;
+
     public String tareaSelecc;
+
+    //lista (ListView) personalizado:
+    private ListView lvItems;
+    private Adaptador adaptador;
+    private ArrayList<Entidad> arrayEntidad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +38,30 @@ public class VerAlojamientos extends AppCompatActivity {
         //Se cargan los datos de los alojamientos:
         cargarDatosAlojamientos();
 
-        //Se muestran los datos de los alojamientos:
-        //listaAlojamientos.clear();
-        mostrarTodosLosAlojamientos();
+        //lista (ListView) personalizado:
+        lvItems = (ListView) findViewById(R.id.lvItems);
+        arrayEntidad = GetArrayItems();
+        adaptador = new Adaptador(arrayEntidad, this);
+        lvItems.setAdapter(adaptador);
+
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?>parent, View view, int position, long id){
+                Intent i = new Intent(VerAlojamientos.this, HacerReserva.class);
+                getIntent().putExtra("nombreAlojSeleccionado",listaAlojamientos.get(position).getNombre());
+                startActivity(i);
+            }
+        });
+    }
+
+    //lista (ListView) personalizado:
+    private ArrayList<Entidad> GetArrayItems(){
+        ArrayList<Entidad> listItems = new ArrayList<>();
+        for (Alojamiento a : listaAlojamientos) {
+            listItems.add(new Entidad(R.drawable.imgcasa, a.getNombre(), a.getTelefono()));
+
+        }
+        return listItems;
     }
 
     public void cargarDatosAlojamientos(){
@@ -51,40 +79,12 @@ public class VerAlojamientos extends AppCompatActivity {
         }
     }
 
-    public void mostrarTodosLosAlojamientos(){
-        lv1 = (ListView)findViewById(R.id.lv1);
-        registerForContextMenu(lv1);//Se debe “registrar” el ContextMenu , por lo que se añadirá la siguiente línea al método onCreate.
-
-       ArrayAdapter<Alojamiento> adapter = new ArrayAdapter<Alojamiento>(this, android.R.layout.simple_list_item_1, listaAlojamientos);
-        lv1.setAdapter(adapter);
-        lv1.setLongClickable(true);
-        lv1.setClickable(true);
-
-        //Cuando se hace click en una tarea:
-        lv1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
-
-                //cambiar por codAdlojamiento??
-                tareaSelecc = listaAlojamientos.get(posicion).getNombre();
-
-                irADetallesHacerReserva(posicion);
-
-            }
-        });
-
-
-    }
-    public void irADetallesHacerReserva(int pos){
-        Intent i = new Intent(this, HacerReserva.class);
-        // i.putExtra("nombreTarea", listaTareas.get(pos));//para mandar un dato a otra actividad
-       //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
-        startActivity(i);
-    }
-
     public void irAHacerReserva(View view){
         Toast toast1 = Toast.makeText(getApplicationContext(), "botón Reservar pulsado", Toast.LENGTH_SHORT);
         toast1.show();
+        // i.putExtra("nombreTarea", listaTareas.get(pos));//para mandar un dato a otra actividad
+        //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
+
         Intent i = new Intent(this, HacerReserva.class);
         startActivity(i);
     }

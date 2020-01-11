@@ -1,1 +1,8 @@
-{"codReserva":1,"codAlojamiento":1,"codUsuario":1,"fechaRealizada":"dic 19, 2019"}
+[{"codReserva":1,"codAlojamiento":1,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 24 2019","fechaSalida":"dic 27 2019"},
+{"codReserva":2,"codAlojamiento":2,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 24 2019","fechaSalida":"dic 28 2019"},
+{"codReserva":3,"codAlojamiento":2,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 25 2019","fechaSalida":"dic 29 2019"},
+{"codReserva":4,"codAlojamiento":4,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 26 2019","fechaSalida":"dic 29 2019"},
+{"codReserva":5,"codAlojamiento":5,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 27 2019","fechaSalida":"dic 29 2019"},
+{"codReserva":6,"codAlojamiento":6,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 28 2019","fechaSalida":"dic 30 2019"},
+{"codReserva":7,"codAlojamiento":7,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 24 2019","fechaSalida":"dic 27 2019"},
+{"codReserva":8,"codAlojamiento":8,"codUsuario":"2","fechaRealizada":"dic 19 2019","fechaEntrada":"dic 24 2019","fechaSalida":"dic 27 2019"}]

@@ -118,7 +118,7 @@ public class ParseJson {
         }
     }
 
-    //readRecetaArray: este método creará nuestra Lista y será el encargado de añadir cada objeto Receta desde que comienza el array (.beginArray(), que correspondería con el 1º [ de nuestro entremeses.json) hasta el final del array (.endArray(), que correspondería con el último ]).
+    //este método creará nuestra Lista y será el encargado de añadir cada objeto Receta desde que comienza el array (.beginArray(), que correspondería con el 1º [ de nuestro entremeses.json) hasta el final del array (.endArray(), que correspondería con el último ]).
     public List<Alojamiento> readAlojamientoArray(JsonReader reader3) throws IOException {
         List<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
 
@@ -130,7 +130,7 @@ public class ParseJson {
         return listaAlojamientos;
     }
 
-    //readReceta:  éste método irá recorriendo los atributos entre {}, en nuestro caso: nombre, pueblo e ingredientes e irá creando un objeto de tipo Receta (tipo Alojamiento, Usuario, Reserva) por cada par de llaves {} encontradas y será devuelto al método anteriormente descrito para que sea añadido a la lista.
+    //éste método irá recorriendo los atributos entre {}, en nuestro caso: nombre, pueblo e ingredientes e irá creando un objeto de tipo Receta (tipo Alojamiento, Usuario, Reserva) por cada par de llaves {} encontradas y será devuelto al método anteriormente descrito para que sea añadido a la lista.
     public Alojamiento readAlojamiento(JsonReader reader) throws IOException {
         int codAlojamiento = 0;
         String nombre= null;
@@ -180,4 +180,61 @@ public class ParseJson {
         return new Alojamiento(codAlojamiento, nombre, telefono, tipo, web, capacidad, descripcion, email, latitud, longitud, localidad, localizacion) ;
     }
     //FIN LEER ALOJAMIENTO
+
+    //LEER RESERVA
+    //readJsonStream: recibe un inputstream con el contenido de nuestro fichero entremeses.json y nos devolverá nuestra lista formada.
+    public List<Reserva> readJsonStreamReserva(InputStream in) throws IOException {
+        JsonReader reader3 = new JsonReader(new InputStreamReader(in, "UTF-8"));
+        try {
+            return readReservaArray(reader3);
+        } finally {
+            reader3.close();
+        }
+    }
+
+    //este método creará nuestra Lista y será el encargado de añadir cada objeto Receta desde que comienza el array (.beginArray(), que correspondería con el 1º [ de nuestro entremeses.json) hasta el final del array (.endArray(), que correspondería con el último ]).
+    public List<Reserva> readReservaArray(JsonReader reader3) throws IOException {
+        List<Reserva> listaReservas = new ArrayList<Reserva>();
+
+        reader3.beginArray();
+        while (reader3.hasNext()) {
+            listaReservas.add(readReserva(reader3));
+        }
+        reader3.endArray();
+        return listaReservas;
+    }
+
+    //éste método irá recorriendo los atributos entre {}, en nuestro caso: nombre, pueblo e ingredientes e irá creando un objeto de tipo Receta (tipo Alojamiento, Usuario, Reserva) por cada par de llaves {} encontradas y será devuelto al método anteriormente descrito para que sea añadido a la lista.
+    public Reserva readReserva(JsonReader reader) throws IOException {
+        int codReserva = 0;
+        int codAlojamiento = 0;
+        String codUsuario= null;
+        String fechaRealizada= null;
+        String fechaEntrada = null;
+        String fechaSalida = null;
+
+
+        reader.beginObject();
+        while (reader.hasNext()) {
+            String name = reader.nextName();
+            if (name.equals("codReserva")) {
+                codReserva = reader.nextInt();
+            } else if (name.equals("codAlojamiento")) {
+                codAlojamiento = reader.nextInt();
+            } else if (name.equals("codUsuario")) {
+                codUsuario = reader.nextString();
+            } else if (name.equals("fechaRealizada")) {
+                fechaRealizada = reader.nextString();
+            }else if (name.equals("fechaEntrada")) {
+                fechaEntrada = reader.nextString();
+            }else if (name.equals("fechaSalida")) {
+                fechaSalida = reader.nextString();
+            }else {
+                reader.skipValue();
+            }
+        }
+        reader.endObject();
+        return new Reserva(codReserva,codAlojamiento,codUsuario,fechaRealizada,fechaEntrada,fechaSalida ) ;
+    }
+    //FIN LEER RESERVA
 }
