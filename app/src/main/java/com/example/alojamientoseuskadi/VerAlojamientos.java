@@ -24,7 +24,7 @@ public class VerAlojamientos extends AppCompatActivity {
     private List<Alojamiento> listaAlojamientos;
     private ParseJson parse2;
 
-    public String tareaSelecc;
+    public String nombreAlojSelecc;
 
     public String tipoAlojSelecc;
     //lista (ListView) personalizado:
@@ -80,7 +80,14 @@ public class VerAlojamientos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
                 Intent i = new Intent(VerAlojamientos.this, HacerReserva.class);
-                getIntent().putExtra("nombreAlojSeleccionado",listaAlojamientos.get(position).getNombre());
+               //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
+                i.putExtra("idAlojSeleccionado",listaAlojamientos.get(position).getCodAlojamiento());
+                i.putExtra("nombreAlojSeleccionado",listaAlojamientos.get(position).getNombre().toString());
+                i.putExtra("descripcionAlojSeleccionado",listaAlojamientos.get(position).getDescripcion().toString());
+                i.putExtra("localidadAlojSeleccionado",listaAlojamientos.get(position).getLocalidad().toString());
+                i.putExtra("telefonoAlojSeleccionado",listaAlojamientos.get(position).getTelefono().toString());
+                i.putExtra("emailAlojSeleccionado",listaAlojamientos.get(position).getEmail().toString());
+                i.putExtra("webAlojSeleccionado",listaAlojamientos.get(position).getWeb().toString());
                 startActivity(i);
             }
         });

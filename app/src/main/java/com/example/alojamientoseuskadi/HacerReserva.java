@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -21,6 +22,13 @@ public class HacerReserva extends AppCompatActivity {
     EditText etFechaSalida;
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
+
+    TextView nombreAloj;
+    TextView descripAloj;
+    TextView localidadAloj;
+    TextView telefonoAloj;
+    TextView emailAloj;
+    TextView webAloj;
 
     private String NombAlojSeleccionado;
 
@@ -37,13 +45,31 @@ public class HacerReserva extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_reserva);
 
-  /*      //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
-        Bundle datos = this.getIntent().getExtras();
-        String nNombreAlojamiento = datos.getString("nombreAlojSeleccionado");
-        Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nNombreAlojamiento, Toast.LENGTH_SHORT);
+      //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
+        String idAlojSeleccionado = getIntent().getStringExtra("idAlojSeleccionado");
+        String nombreAlojamiento = getIntent().getStringExtra("nombreAlojSeleccionado");
+        String descripcionAlojSeleccionado = getIntent().getStringExtra("descripcionAlojSeleccionado");
+        String localidadAlojSeleccionado = getIntent().getStringExtra("localidadAlojSeleccionado");
+        String telefonoAlojSeleccionado = getIntent().getStringExtra("telefonoAlojSeleccionado");
+        String webAlojSeleccionado = getIntent().getStringExtra("webAlojSeleccionado");
+        String emailAlojSeleccionado = getIntent().getStringExtra("emailAlojSeleccionado");
+
+        Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nombreAlojamiento, Toast.LENGTH_SHORT);
         toast1.show();
 
-   */
+        //Se rellenan los datos del activity con los datos que hemos pasado:
+        nombreAloj = findViewById(R.id.tvNombre);
+        nombreAloj.setText(nombreAlojamiento);
+        descripAloj = findViewById(R.id.tvDescripcion);
+        descripAloj.setText(descripcionAlojSeleccionado);
+        localidadAloj =findViewById(R.id.tvlocalidad);
+        localidadAloj.setText(localidadAlojSeleccionado);
+        telefonoAloj= findViewById(R.id.tvTelefono);
+        telefonoAloj.setText(telefonoAlojSeleccionado);
+        webAloj= findViewById(R.id.tvWeb);
+        webAloj.setText(webAlojSeleccionado);
+        emailAloj= findViewById(R.id.tvEmail);
+        emailAloj.setText(emailAlojSeleccionado);
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);

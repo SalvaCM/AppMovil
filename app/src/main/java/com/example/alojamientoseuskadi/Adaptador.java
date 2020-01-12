@@ -47,7 +47,7 @@ public class Adaptador extends BaseAdapter {
         TextView tvTitulo = (TextView) convertView.findViewById(R.id.tvTitulo);
         TextView tvContenido = (TextView) convertView.findViewById(R.id.tvContenido);
         TextView tvTelefono = (TextView) convertView.findViewById(R.id.tvTelefono);
-        TextView tvWeb = (TextView) convertView.findViewById(R.id.tvWeb);
+        TextView tvWeb = (TextView) convertView.findViewById(R.id.tvEmail);
 
         //rellenan el contenido de la vista con el contenido del obtjeto
         imgFoto.setImageResource(Item.getImgFoto());
