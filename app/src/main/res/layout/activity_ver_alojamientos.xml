@@ -7,26 +7,27 @@
     tools:context=".VerAlojamientos">
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+    <Spinner
+        android:id="@+id/spinnerTipoAloj"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="336dp"
+        android:layout_height="353dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:orientation="vertical">
-            <ListView
-                android:id="@+id/lvItems"
-                android:layout_width="336dp"
-                android:layout_height="353dp">
+    </ListView>
 
-
-            </ListView>
-        </LinearLayout>
-    </LinearLayout>
 
     <Button
         android:id="@+id/btnReservar"

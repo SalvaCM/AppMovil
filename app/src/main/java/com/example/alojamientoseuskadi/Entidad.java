@@ -6,21 +6,54 @@ public class Entidad implements Serializable {
     private int imgFoto;
     private String titulo;
     private String contenido;
-    private String contenido2;
+    private String telefono;
+    private String web;
 
-    public Entidad(int imgFoto, String titulo, String contenido){
-        this.imgFoto=imgFoto;
-        this.titulo=titulo;
-        this.contenido=contenido;
+    public Entidad(int imgFoto, String titulo, String contenido, String telefono, String web) {
+        this.imgFoto = imgFoto;
+        this.titulo = titulo;
+        this.contenido = contenido;
+        this.telefono = telefono;
+        this.web = web;
     }
 
-    public int getImgFoto(){
+    public int getImgFoto() {
         return imgFoto;
     }
-    public String getTitulo(){
+
+    public void setImgFoto(int imgFoto) {
+        this.imgFoto = imgFoto;
+    }
+
+    public String getTitulo() {
         return titulo;
     }
-    public String getContenido(){
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getContenido() {
         return contenido;
+    }
+
+    public void setContenido(String contenido) {
+        this.contenido = contenido;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getWeb() {
+        return web;
+    }
+
+    public void setWeb(String web) {
+        this.web = web;
     }
 }

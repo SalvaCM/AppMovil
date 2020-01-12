@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +26,12 @@ public class VerAlojamientos extends AppCompatActivity {
 
     public String tareaSelecc;
 
+    public String tipoAlojSelecc;
     //lista (ListView) personalizado:
     private ListView lvItems;
     private Adaptador adaptador;
     private ArrayList<Entidad> arrayEntidad;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,35 @@ public class VerAlojamientos extends AppCompatActivity {
         adaptador = new Adaptador(arrayEntidad, this);
         lvItems.setAdapter(adaptador);
 
+        //Spiner para tipo de alojamiento:
+        Spinner spinner = (Spinner) findViewById(R.id.spinnerTipoAloj);
+        String[] letra = {"Todos","Rurales","Campings"};
+        spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
+
+
+        //Cuando se selecciona un tipo de alojamiento:
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                tipoAlojSelecc = (String) adapterView.getItemAtPosition(pos).toString();
+                Toast.makeText(adapterView.getContext(),
+                        (String) "Seleccionado: " + tipoAlojSelecc, Toast.LENGTH_SHORT).show();
+
+                //Se cargan los datos de los alojamientos Filtrados por tipo:
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+
+
+
+        //Cuando selecciona algún alojamiento:
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
@@ -58,7 +90,10 @@ public class VerAlojamientos extends AppCompatActivity {
     private ArrayList<Entidad> GetArrayItems(){
         ArrayList<Entidad> listItems = new ArrayList<>();
         for (Alojamiento a : listaAlojamientos) {
-            listItems.add(new Entidad(R.drawable.imgcasa, a.getNombre(), a.getTelefono()));
+           // if(a.getTipo().toString().equals("Rural")){
+                listItems.add(new Entidad(R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb()));
+           // }
+
 
         }
         return listItems;

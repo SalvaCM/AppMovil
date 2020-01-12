@@ -9,7 +9,7 @@
     <string name="opcion_menu2">Ver reservas</string>
     <string name="opcion_menu3">Mapa</string>
     <string name="opcion_menu4">Acerca de</string>
-    <string name="opcion_menu5">Iniciar sesión</string>
+    <string name="opcion_menu5">Cerrar sesión</string>
 
 
     <!-- Strings related to login -->
