@@ -120,6 +120,11 @@ public class VerAlojamientos extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    //Métodos de los botones
+    public void atras(View view){
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
 
     public void irAHacerReserva(View view){
         Toast toast1 = Toast.makeText(getApplicationContext(), "botón Reservar pulsado", Toast.LENGTH_SHORT);
