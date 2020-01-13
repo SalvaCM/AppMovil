@@ -20,6 +20,8 @@ public class Login extends AppCompatActivity {
     private ParseJson parse1;
     private EditText usuario;
     private EditText contrasena;
+    private boolean usuarioCorrecto = false;
+    private boolean contrasenaCorrecta = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class Login extends AppCompatActivity {
         StringBuilder receta = new StringBuilder();
         // Recorrer objeto List<Usuario> y concatenarlo en una variable para
         // mostrarlo.
+        receta.append("\nPRUEBAS:: " );
         for (Usuario u : listaUsuarios) {
             receta.append("\nDni: " + u.getDni());
             receta.append("\nNombre: " + u.getNombre());
@@ -87,14 +90,13 @@ public class Login extends AppCompatActivity {
         //Se comprueba que el usuario y la contraseña introducidos sean correctos
         //Usuario
         for (Usuario u : listaUsuarios) {
-            notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
-            notificacion.show();
-        if(u.getDni().equals(usuario.getText())){
-            notificacion = Toast.makeText(this, "El usuario SI está en BBDD", Toast.LENGTH_LONG);
-            notificacion.show();
-            //contraseña
-            if(u.getContrasena().equals(contrasena.getText()) & contrasena.length()>=1){
 
+        if(u.getDni().equals(usuario.getText().toString())){
+            usuarioCorrecto = true;
+
+            //contraseña
+            if(u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length()>=1){
+                contrasenaCorrecta = true;
                 //Se resetean los datos:
                 usuario.setText("");
                 contrasena.setText("");
@@ -103,13 +105,19 @@ public class Login extends AppCompatActivity {
                 Intent i = new Intent(this,MainActivity.class);
                 startActivity(i);
                 setContentView(R.layout.activity_main);
-
-
             }
             else{
+                notificacion = Toast.makeText(this, R.string.invalid_password2, Toast.LENGTH_LONG);
+                notificacion.show();
                 //Se resetean los datos:
                 contrasena.setText("");
             }
+            if(usuarioCorrecto & contrasenaCorrecta){
+                notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
+                notificacion.show();
+            }
+
+
         }
      /*   else{
             //Se resetean los datos:
