@@ -71,17 +71,17 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                 .title("Mi posición")
                 .snippet("CIFP Elorrieta - Erreka Mari LHII")
                 .icon(BitmapDescriptorFactory
-                        .fromResource(android.R.drawable.ic_menu_compass))
+                        .fromResource(android.R.drawable.ic_menu_mylocation))
                 .anchor(0.5f, 0.5f));
         mapa.setOnMapClickListener(this);
-        
+
         //PRUEBAS Para añadir  marcadores
         mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
                 .position(new LatLng(39.481106, -0.340987))
                 .title("Mi posición2")
                 .snippet("222222")
                 .icon(BitmapDescriptorFactory
-                        .fromResource(android.R.drawable.ic_menu_compass))
+                        .fromResource(android.R.drawable.ic_menu_mylocation))
                 .anchor(0.5f, 0.5f));
         mapa.setOnMapClickListener(this);
         //PRUEBAS Para añadir  marcadores
