@@ -43,13 +43,13 @@ public class VerAlojamientos extends AppCompatActivity {
 
         //lista (ListView) personalizado:
         lvItems = (ListView) findViewById(R.id.lvItems);
-        arrayEntidad = GetArrayItems();
+        /*arrayEntidad = GetArrayItems();
         adaptador = new Adaptador(arrayEntidad, this);
-        lvItems.setAdapter(adaptador);
+        lvItems.setAdapter(adaptador);*/
 
         //Spiner para tipo de alojamiento:
         Spinner spinner = (Spinner) findViewById(R.id.spinnerTipoAloj);
-        String[] letra = {"Todos","Rurales","Campings"};
+        String[] letra = {"Todos","Albergue","Rural","Camping"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
 
@@ -64,6 +64,8 @@ public class VerAlojamientos extends AppCompatActivity {
                         (String) "Seleccionado: " + tipoAlojSelecc, Toast.LENGTH_SHORT).show();
 
                 //Se cargan los datos de los alojamientos Filtrados por tipo:
+                GetArrayItemsFiltrado(tipoAlojSelecc);
+
 
             }
 
@@ -71,7 +73,14 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent)
             {    }
         });
-
+        /*
+        i.putExtra("idAlojSeleccionado",listaAlojamientos.get(position).getCodAlojamiento());
+        i.putExtra("nombreAlojSeleccionado", GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTitulo());
+        i.putExtra("descripcionAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getDesc());
+        i.putExtra("localidadAlojSeleccionado",listaAlojamientos.get(position).getLocalidad().toString());
+        i.putExtra("telefonoAlojSeleccionado",listaAlojamientos.get(position).getTelefono().toString());
+        i.putExtra("emailAlojSeleccionado",listaAlojamientos.get(position).getEmail().toString());
+        i.putExtra("webAlojSeleccionado",listaAlojamientos.get(position).getWeb().toString());*/
 
 
 
@@ -81,28 +90,31 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
                 Intent i = new Intent(VerAlojamientos.this, HacerReserva.class);
                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
-                i.putExtra("idAlojSeleccionado",listaAlojamientos.get(position).getCodAlojamiento());
-                i.putExtra("nombreAlojSeleccionado",listaAlojamientos.get(position).getNombre().toString());
-                i.putExtra("descripcionAlojSeleccionado",listaAlojamientos.get(position).getDescripcion().toString());
-                i.putExtra("localidadAlojSeleccionado",listaAlojamientos.get(position).getLocalidad().toString());
-                i.putExtra("telefonoAlojSeleccionado",listaAlojamientos.get(position).getTelefono().toString());
-                i.putExtra("emailAlojSeleccionado",listaAlojamientos.get(position).getEmail().toString());
-                i.putExtra("webAlojSeleccionado",listaAlojamientos.get(position).getWeb().toString());
+                i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getId());
+                i.putExtra("nombreAlojSeleccionado", GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTitulo());
+                i.putExtra("descripcionAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getDesc());
+                i.putExtra("localidadAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getLocalidad());
+                i.putExtra("telefonoAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTelefono());
+                i.putExtra("emailAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getEmail());
+                i.putExtra("webAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getWeb());
                 startActivity(i);
             }
         });
     }
 
-    //lista (ListView) personalizado:
-    private ArrayList<Entidad> GetArrayItems(){
+    
+
+    private ArrayList<Entidad> GetArrayItemsFiltrado(String opcion){
         ArrayList<Entidad> listItems = new ArrayList<>();
         for (Alojamiento a : listaAlojamientos) {
-           // if(a.getTipo().toString().equals("Rural")){
-                listItems.add(new Entidad(R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb()));
-           // }
-
-
+            if(a.getTipo().equals(opcion)){
+                listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+            }else if(opcion.equals("Todos")){
+                listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+            }
         }
+        adaptador = new Adaptador(listItems,this);
+        lvItems.setAdapter(adaptador);
         return listItems;
     }
 

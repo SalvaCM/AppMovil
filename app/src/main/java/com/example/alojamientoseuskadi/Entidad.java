@@ -4,17 +4,25 @@ import java.io.Serializable;
 
 public class Entidad implements Serializable {
     private int imgFoto;
+    private int id;
     private String titulo;
     private String contenido;
     private String telefono;
     private String web;
+    private String desc;
+    private String localidad;
+    private String email;
 
-    public Entidad(int imgFoto, String titulo, String contenido, String telefono, String web) {
+    public Entidad(int id, int imgFoto, String titulo, String contenido, String telefono, String web, String desc, String localidad, String email) {
+        this.id = id;
         this.imgFoto = imgFoto;
         this.titulo = titulo;
         this.contenido = contenido;
         this.telefono = telefono;
         this.web = web;
+        this.desc = desc;
+        this.localidad = localidad;
+        this.email = email;
     }
 
     public int getImgFoto() {
@@ -55,5 +63,37 @@ public class Entidad implements Serializable {
 
     public void setWeb(String web) {
         this.web = web;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
