@@ -22,7 +22,8 @@ public class Login extends AppCompatActivity {
     private EditText contrasena;
     private boolean usuarioCorrecto = false;
     private boolean contrasenaCorrecta = false;
-
+    private String usuarioIntroducido;
+    private String contrasenaIntroducida;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,10 +94,11 @@ public class Login extends AppCompatActivity {
 
         if(u.getDni().equals(usuario.getText().toString())){
             usuarioCorrecto = true;
-
+            usuarioIntroducido =u.getDni().toString();
             //contraseña
             if(u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length()>=1){
                 contrasenaCorrecta = true;
+
                 //Se resetean los datos:
                 usuario.setText("");
                 contrasena.setText("");
@@ -104,6 +106,8 @@ public class Login extends AppCompatActivity {
                 //Si el usuario y la contraseña son correctos se entra en la app
                 Intent i = new Intent(this,MainActivity.class);
                 startActivity(i);
+                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
+                i.putExtra("usuarioIntroducido",usuarioIntroducido);
                 setContentView(R.layout.activity_main);
             }
             else{

@@ -29,6 +29,7 @@ public class HacerReserva extends AppCompatActivity {
     TextView telefonoAloj;
     TextView emailAloj;
     TextView webAloj;
+    TextView usuarioLog;
 
     private String NombAlojSeleccionado;
 
@@ -54,6 +55,8 @@ public class HacerReserva extends AppCompatActivity {
         String webAlojSeleccionado = getIntent().getStringExtra("webAlojSeleccionado");
         String emailAlojSeleccionado = getIntent().getStringExtra("emailAlojSeleccionado");
 
+        String usuarioLogeado = getIntent().getStringExtra("usuarioIntroducido");
+
         Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nombreAlojamiento, Toast.LENGTH_SHORT);
         toast1.show();
 
@@ -70,6 +73,9 @@ public class HacerReserva extends AppCompatActivity {
         webAloj.setText(webAlojSeleccionado);
         emailAloj= findViewById(R.id.tvEmail);
         emailAloj.setText(emailAlojSeleccionado);
+        usuarioLog= findViewById(R.id.tvUsuarioLog);
+        usuarioLog.setText(usuarioLogeado);
+
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);

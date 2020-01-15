@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -33,9 +34,10 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
     private List<Alojamiento> listaAlojamientos;
     private ParseJson parse2;
     private GoogleMap mapa;
-    //private final LatLng UPV = new LatLng(39.481106, -0.340987);
+
     private final LatLng UPV = new LatLng(43.2814236, -2.9675669);
-    private final LatLng UPV2 = new LatLng(39.481106, -0.340987);
+    //private final LatLng UPV2 = new LatLng(39.481106, -0.340987);
+
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
@@ -70,12 +72,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
 
     //*************************MAPAS**********************************************
     @Override public void onMapReady(GoogleMap googleMap) {
+
+        LatLng UPV2 = new LatLng(39.481106, -0.340987);
+
         mapa = googleMap;
         mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //mapa.getUiSettings().setZoomControlsEnabled(false);
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 15));//desplaza el área de visualización a una determinada posición (UPV), a la vez que define el nivel de zum (15)
 
         //Para añadir  marcadores
+
         mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
                 .position(UPV)
                 .title("Mi posición")
@@ -85,26 +91,45 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                 .anchor(0.5f, 0.5f));
         mapa.setOnMapClickListener(this);
 
+        mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
+                .position(UPV2)
+                .title("Mi posición2")
+                .snippet("gfhfgh")
+                .icon(BitmapDescriptorFactory
+                        .fromResource(android.R.drawable.ic_menu_mylocation))
+                .anchor(0.5f, 0.5f));
+        mapa.setOnMapClickListener(this);
+
+
         //PRUEBAS Para añadir  marcadores
-/*
-for (Alojamiento a : listaAlojamientos) {
-            double latitud = parseInt(a.getLatitud().toString());
-            double longitud = parseInt(a.getLongitud().toString());
 
-            LatLng posicion = new LatLng(latitud, longitud);
+        for (Alojamiento a :listaAlojamientos) {
+            if (!a.getLatitud().toString().equals("Latitud no disponible")){
+                final double latitud = Double.parseDouble(a.getLatitud().toString());
+                final double longitud = Double.parseDouble(a.getLongitud().toString());
 
-            mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
+                LatLng posicion = new LatLng(latitud, longitud);
 
-                    .position(posicion)
-                    //.title(a.getNombre().toString())
-                   // .snippet("222222")
-                    .icon(BitmapDescriptorFactory
-                            .fromResource(android.R.drawable.ic_menu_mylocation))
-                    .anchor(0.5f, 0.5f));
-            mapa.setOnMapClickListener(this);
+                mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
+
+                        .position(posicion)
+                        .title(a.getNombre().toString())
+                        // .snippet("222222")
+                        .icon(BitmapDescriptorFactory
+                                .fromResource(android.R.drawable.ic_menu_mylocation))
+                        .anchor(0.5f, 0.5f));
+                mapa.animateCamera(CameraUpdateFactory.newLatLng(posicion));
+                mapa.setOnMapClickListener(this);
+            }
+
+
 
         }
- */
+
+
+
+
+
 
 
 
