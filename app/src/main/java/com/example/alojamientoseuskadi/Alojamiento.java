@@ -19,6 +19,7 @@ public class Alojamiento {
         return
                 "Nombre:"+ nombre  +"\n" +
                 "Dirección:"+localizacion + " "+localidad  +"\n" +
+                "Latitud:"+latitud + "- longitud "+longitud  +"\n" +
                 "Teléfono :" + telefono  +"\n" +
                 "Email :" + email  +"\n" +
                 "Web :" + web;

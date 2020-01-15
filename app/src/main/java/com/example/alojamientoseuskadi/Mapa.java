@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -20,7 +25,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import static java.lang.Integer.parseInt;
+
 public class Mapa extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapClickListener {
+    TextView tvPruebas;
+    ListView lvVerPosiciones;
     private List<Alojamiento> listaAlojamientos;
     private ParseJson parse2;
     private GoogleMap mapa;
@@ -35,7 +44,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         //Se cargan los datos de los alojamientos:
         cargarDatosAlojamientos();
 
-
+        //Se muestran los datos de los alojamientos:
+        mostrarTodasLasReservas();
         //*************************MAPAS**********************************************
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager().findFragmentById(R.id.mapa);
@@ -76,14 +86,29 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         mapa.setOnMapClickListener(this);
 
         //PRUEBAS Para añadir  marcadores
-        mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
-                .position(new LatLng(39.481106, -0.340987))
-                .title("Mi posición2")
-                .snippet("222222")
-                .icon(BitmapDescriptorFactory
-                        .fromResource(android.R.drawable.ic_menu_mylocation))
-                .anchor(0.5f, 0.5f));
-        mapa.setOnMapClickListener(this);
+/*
+for (Alojamiento a : listaAlojamientos) {
+            double latitud = parseInt(a.getLatitud().toString());
+            double longitud = parseInt(a.getLongitud().toString());
+
+            LatLng posicion = new LatLng(latitud, longitud);
+
+            mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
+
+                    .position(posicion)
+                    //.title(a.getNombre().toString())
+                   // .snippet("222222")
+                    .icon(BitmapDescriptorFactory
+                            .fromResource(android.R.drawable.ic_menu_mylocation))
+                    .anchor(0.5f, 0.5f));
+            mapa.setOnMapClickListener(this);
+
+        }
+ */
+
+
+
+
         //PRUEBAS Para añadir  marcadores
 
         if (ActivityCompat.checkSelfPermission(this,
@@ -111,4 +136,18 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
     }
 
     //FIN*************************MAPAS**********************************************
+    public void mostrarTodasLasReservas(){
+        lvVerPosiciones = (ListView)findViewById(R.id.lvVerPosiciones);
+        registerForContextMenu(lvVerPosiciones);//Se debe “registrar” el ContextMenu , por lo que se añadirá la siguiente línea al método onCreate.
+
+        ArrayAdapter<Alojamiento> adapter = new ArrayAdapter<Alojamiento>(this, android.R.layout.simple_list_item_1, listaAlojamientos);
+        lvVerPosiciones.setAdapter(adapter);
+        lvVerPosiciones.setLongClickable(true);
+        lvVerPosiciones.setClickable(true);
+
+
+
+
+    }
+
 }
