@@ -32,7 +32,6 @@ public class VerAlojamientos extends AppCompatActivity {
     private Adaptador adaptador;
     private ArrayList<Entidad> arrayEntidad;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,9 +42,6 @@ public class VerAlojamientos extends AppCompatActivity {
 
         //lista (ListView) personalizado:
         lvItems = (ListView) findViewById(R.id.lvItems);
-        /*arrayEntidad = GetArrayItems();
-        adaptador = new Adaptador(arrayEntidad, this);
-        lvItems.setAdapter(adaptador);*/
 
         //Spiner para tipo de alojamiento:
         Spinner spinner = (Spinner) findViewById(R.id.spinnerTipoAloj);
@@ -73,16 +69,6 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent)
             {    }
         });
-        /*
-        i.putExtra("idAlojSeleccionado",listaAlojamientos.get(position).getCodAlojamiento());
-        i.putExtra("nombreAlojSeleccionado", GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTitulo());
-        i.putExtra("descripcionAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getDesc());
-        i.putExtra("localidadAlojSeleccionado",listaAlojamientos.get(position).getLocalidad().toString());
-        i.putExtra("telefonoAlojSeleccionado",listaAlojamientos.get(position).getTelefono().toString());
-        i.putExtra("emailAlojSeleccionado",listaAlojamientos.get(position).getEmail().toString());
-        i.putExtra("webAlojSeleccionado",listaAlojamientos.get(position).getWeb().toString());*/
-
-
 
         //Cuando selecciona algún alojamiento:
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){

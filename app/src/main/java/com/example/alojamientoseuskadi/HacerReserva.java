@@ -57,10 +57,14 @@ public class HacerReserva extends AppCompatActivity {
         String webAlojSeleccionado = getIntent().getStringExtra("webAlojSeleccionado");
         String emailAlojSeleccionado = getIntent().getStringExtra("emailAlojSeleccionado");
 
-
-
         Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nombreAlojamiento, Toast.LENGTH_SHORT);
         toast1.show();
+
+        //Se saca el usuario que se ha logueado que está guardado en la clase SharedPreferences
+        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+        String nombre = settings.getString("usuarioLogeado", "");
+        usuarioLog = findViewById(R.id.tvUsuarioLog);
+        usuarioLog.setText(nombre);
 
         //Se rellenan los datos del activity con los datos que hemos pasado:
         nombreAloj = findViewById(R.id.tvNombre);
@@ -75,15 +79,6 @@ public class HacerReserva extends AppCompatActivity {
         webAloj.setText(webAlojSeleccionado);
         emailAloj= findViewById(R.id.tvEmail);
         emailAloj.setText(emailAlojSeleccionado);
-
-
-        //SharedPreferences prefe=getSharedPreferences("usuarioLogeado", Context.MODE_PRIVATE);
-       // usuarioLog.setText(prefe.getString("usuarioLogeado",""));
-
-        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
-        String nombre = settings.getString("usuarioLogeado", "");
-        usuarioLog = findViewById(R.id.tvUsuarioLog);
-        usuarioLog.setText(nombre);
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);
