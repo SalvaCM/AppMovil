@@ -106,8 +106,16 @@ public class Login extends AppCompatActivity {
                 //Si el usuario y la contraseña son correctos se entra en la app
                 Intent i = new Intent(this,MainActivity.class);
                 startActivity(i);
-                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
-                i.putExtra("usuarioIntroducido",usuarioIntroducido);
+                //Se guarda el usuario y la contraseña y entra en la app
+                SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString("usuarioLogeado", usuarioIntroducido );
+                editor.commit();
+                //SharedPreferences.Editor editor=preferencias.edit();
+                //editor.putString("usuarioLogeado", usuarioIntroducido);
+                //editor.putString("contrasena", contr);
+                //editor.commit();
+
                 setContentView(R.layout.activity_main);
             }
             else{

@@ -3,7 +3,9 @@ package com.example.alojamientoseuskadi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -31,7 +33,7 @@ public class HacerReserva extends AppCompatActivity {
     TextView webAloj;
     TextView usuarioLog;
 
-    private String NombAlojSeleccionado;
+    private String nombAlojSeleccionado;
 
     //Declaración de variables
     String formatoDeFecha = "dd/MM/yyyy"; //In which you need put here
@@ -55,7 +57,7 @@ public class HacerReserva extends AppCompatActivity {
         String webAlojSeleccionado = getIntent().getStringExtra("webAlojSeleccionado");
         String emailAlojSeleccionado = getIntent().getStringExtra("emailAlojSeleccionado");
 
-        String usuarioLogeado = getIntent().getStringExtra("usuarioIntroducido");
+
 
         Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nombreAlojamiento, Toast.LENGTH_SHORT);
         toast1.show();
@@ -73,9 +75,15 @@ public class HacerReserva extends AppCompatActivity {
         webAloj.setText(webAlojSeleccionado);
         emailAloj= findViewById(R.id.tvEmail);
         emailAloj.setText(emailAlojSeleccionado);
-        usuarioLog= findViewById(R.id.tvUsuarioLog);
-        usuarioLog.setText(usuarioLogeado);
 
+
+        //SharedPreferences prefe=getSharedPreferences("usuarioLogeado", Context.MODE_PRIVATE);
+       // usuarioLog.setText(prefe.getString("usuarioLogeado",""));
+
+        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+        String nombre = settings.getString("usuarioLogeado", "");
+        usuarioLog = findViewById(R.id.tvUsuarioLog);
+        usuarioLog.setText(nombre);
 
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);
