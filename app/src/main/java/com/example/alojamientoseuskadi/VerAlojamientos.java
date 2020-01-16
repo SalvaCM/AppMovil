@@ -114,6 +114,7 @@ public class VerAlojamientos extends AppCompatActivity {
 
         } catch (IOException e) {
             e.printStackTrace();
+            System.out.println("Lectura Json no se pudo realizar");
         } catch (Exception e) {
             e.printStackTrace();
         }
