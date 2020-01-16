@@ -22,7 +22,8 @@ public class Login extends AppCompatActivity {
     private EditText contrasena;
     private boolean usuarioCorrecto = false;
     private boolean contrasenaCorrecta = false;
-
+    private String usuarioIntroducido;
+    private String contrasenaIntroducida;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,39 +92,49 @@ public class Login extends AppCompatActivity {
         //Usuario
         for (Usuario u : listaUsuarios) {
 
-        if(u.getDni().equals(usuario.getText().toString())){
-            usuarioCorrecto = true;
+            if(u.getDni().equals(usuario.getText().toString())){
+                usuarioCorrecto = true;
+                usuarioIntroducido =u.getDni().toString();
+                //contraseña
+                if(u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length()>=1){
+                    contrasenaCorrecta = true;
 
-            //contraseña
-            if(u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length()>=1){
-                contrasenaCorrecta = true;
-                //Se resetean los datos:
-                usuario.setText("");
-                contrasena.setText("");
+                    //Se resetean los datos:
+                    usuario.setText("");
+                    contrasena.setText("");
 
-                //Si el usuario y la contraseña son correctos se entra en la app
-                Intent i = new Intent(this,MainActivity.class);
-                startActivity(i);
-                setContentView(R.layout.activity_main);
+                    //Si el usuario y la contraseña son correctos se entra en la app
+                    Intent i = new Intent(this,MainActivity.class);
+                    startActivity(i);
+                    //Se guarda el usuario y la contraseña y entra en la app
+                    SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putString("usuarioLogeado", usuarioIntroducido );
+                    editor.commit();
+                    //SharedPreferences.Editor editor=preferencias.edit();
+                    //editor.putString("usuarioLogeado", usuarioIntroducido);
+                    //editor.putString("contrasena", contr);
+                    //editor.commit();
+
+                    setContentView(R.layout.activity_main);
+                }
+                else{
+                    notificacion = Toast.makeText(this, R.string.invalid_password2, Toast.LENGTH_LONG);
+                    notificacion.show();
+                    //Se resetean los datos:
+                    contrasena.setText("");
+                }
+                if(usuarioCorrecto & contrasenaCorrecta){
+                    notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
+                    notificacion.show();
+                }
+
+
             }
-            else{
-                notificacion = Toast.makeText(this, R.string.invalid_password2, Toast.LENGTH_LONG);
-                notificacion.show();
-                //Se resetean los datos:
-                contrasena.setText("");
-            }
-            if(usuarioCorrecto & contrasenaCorrecta){
-                notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
-                notificacion.show();
-            }
-
-
-        }
      /*   else{
             //Se resetean los datos:
             usuario.setText("");
             contrasena.setText("");
-
             notificacion = Toast.makeText(this, R.string.login_failed, Toast.LENGTH_LONG);
             notificacion.show();
         }

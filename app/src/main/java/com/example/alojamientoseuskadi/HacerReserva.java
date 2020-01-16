@@ -3,7 +3,9 @@ package com.example.alojamientoseuskadi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
@@ -29,8 +31,9 @@ public class HacerReserva extends AppCompatActivity {
     TextView telefonoAloj;
     TextView emailAloj;
     TextView webAloj;
+    TextView usuarioLog;
 
-    private String NombAlojSeleccionado;
+    private String nombAlojSeleccionado;
 
     //Declaración de variables
     String formatoDeFecha = "dd/MM/yyyy"; //In which you need put here
@@ -45,7 +48,7 @@ public class HacerReserva extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hacer_reserva);
 
-      //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
+        //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
         String idAlojSeleccionado = getIntent().getStringExtra("idAlojSeleccionado");
         String nombreAlojamiento = getIntent().getStringExtra("nombreAlojSeleccionado");
         String descripcionAlojSeleccionado = getIntent().getStringExtra("descripcionAlojSeleccionado");
@@ -56,6 +59,12 @@ public class HacerReserva extends AppCompatActivity {
 
         Toast toast1 = Toast.makeText(getApplicationContext(), "nombreAlojSeleccionado" + nombreAlojamiento, Toast.LENGTH_SHORT);
         toast1.show();
+
+        //Se saca el usuario que se ha logueado que está guardado en la clase SharedPreferences
+        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+        String nombre = settings.getString("usuarioLogeado", "");
+        usuarioLog = findViewById(R.id.tvUsuarioLog);
+        usuarioLog.setText(nombre);
 
         //Se rellenan los datos del activity con los datos que hemos pasado:
         nombreAloj = findViewById(R.id.tvNombre);
@@ -126,7 +135,7 @@ public class HacerReserva extends AppCompatActivity {
 
     //Fecha entrada
     private void actualizarInput() {
-       etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
+        etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
 
     }
 
@@ -138,7 +147,7 @@ public class HacerReserva extends AppCompatActivity {
     //Métodos de los botones
     public void atras(View view){
         Intent i = new Intent(this, VerAlojamientos.class);
-         startActivity(i);
+        startActivity(i);
     }
 
     public void hacerReserva(View view){
