@@ -3,8 +3,9 @@
     package="com.example.alojamientoseuskadi">
     <!-- Permisos para conectar a internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Permisos para conectar a internet -->
+    <!-- Permisos para conectar a internet Se solicita por separado permiso para el servicio de localización de forma precisa (fine) y para localizarnos de forma aproximada (coarse):-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"

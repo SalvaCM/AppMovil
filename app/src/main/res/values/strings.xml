@@ -44,5 +44,8 @@
 
     <!-- Strings related to VerAlojamientos -->
 
-
+    <!-- Strings related to Mapa -->
+    <string name="miPosicion">"Ir a mi posición"</string>
+    <string name="miDiezKm">"Ver 10 Km"</string>
+    <string name="marcador">"Marcador"</string>
 </resources>

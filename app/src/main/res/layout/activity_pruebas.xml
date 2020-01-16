@@ -25,34 +25,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/especieAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerInParent="true"
-            android:background="?android:selectableItemBackground"
+        <com.google.android.maps.MapView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/mapview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:clickable="true"
-            android:focusable="true"
-            android:textSize="24sp" />
-
-        <ImageView
-            android:id="@+id/imagenAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/especieAnimal"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:id="@+id/descAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imagenAnimal"
-            android:layout_centerInParent="true"
-            android:background="?android:selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true" />
-
+            android:apiKey="0xJ4uwRGDV296srCn4Iiy46oFmd1jecLr07BsAA"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

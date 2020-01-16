@@ -11,52 +11,6 @@ import java.util.List;
 
 public class ParseJson {
 
-    //LEER RECETA
-    //readJsonStream: recibe un inputstream con el contenido de nuestro fichero entremeses.json y nos devolverá nuestra lista formada.
-    public List<Receta> readJsonStream(InputStream in) throws IOException {
-        JsonReader reader = new JsonReader(new InputStreamReader(in, "UTF-8"));
-        try {
-            return readRecetasArray(reader);
-        } finally {
-            reader.close();
-        }
-    }
-
-    //readRecetaArray: este método creará nuestra Lista y será el encargado de añadir cada objeto Receta desde que comienza el array (.beginArray(), que correspondería con el 1º [ de nuestro entremeses.json) hasta el final del array (.endArray(), que correspondería con el último ]).
-    public List<Receta> readRecetasArray(JsonReader reader) throws IOException {
-        List<Receta> recetas = new ArrayList<Receta>();
-
-        reader.beginArray();
-        while (reader.hasNext()) {
-            recetas.add(readReceta(reader));
-        }
-        reader.endArray();
-        return recetas;
-    }
-
-    //readReceta:  éste método irá recorriendo los atributos entre {}, en nuestro caso: nombre, pueblo e ingredientes e irá creando un objeto de tipo Receta (tipo Alojamiento, Usuario, Reserva) por cada par de llaves {} encontradas y será devuelto al método anteriormente descrito para que sea añadido a la lista.
-    public Receta readReceta(JsonReader reader) throws IOException {
-        String nombre = null;
-        String pueblo = null;
-        String ingredientes = null;
-
-        reader.beginObject();
-        while (reader.hasNext()) {
-            String name = reader.nextName();
-            if (name.equals("nombre")) {
-                nombre = reader.nextString();
-            } else if (name.equals("pueblo")) {
-                pueblo = reader.nextString();
-            } else if (name.equals("ingredientes") && reader.peek() != JsonToken.NULL) {
-                ingredientes = reader.nextString();
-            } else {
-                reader.skipValue();
-            }
-        }
-        reader.endObject();
-        return new Receta(nombre, pueblo, ingredientes);
-    }
-
     //LEER USUARIO
     //readJsonStream: recibe un inputstream con el contenido de nuestro fichero entremeses.json y nos devolverá nuestra lista formada.
     public List<Usuario> readJsonStreamUSUARIO(InputStream in) throws IOException {

@@ -92,11 +92,11 @@ public class Login extends AppCompatActivity {
         //Usuario
         for (Usuario u : listaUsuarios) {
 
-            if(u.getDni().equals(usuario.getText().toString())){
+            if (u.getDni().equals(usuario.getText().toString())) {
                 usuarioCorrecto = true;
-                usuarioIntroducido =u.getDni().toString();
+                usuarioIntroducido = u.getDni().toString();
                 //contraseña
-                if(u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length()>=1){
+                if (u.getContrasena().equals(contrasena.getText().toString()) & contrasena.length() >= 1) {
                     contrasenaCorrecta = true;
 
                     //Se resetean los datos:
@@ -104,12 +104,12 @@ public class Login extends AppCompatActivity {
                     contrasena.setText("");
 
                     //Si el usuario y la contraseña son correctos se entra en la app
-                    Intent i = new Intent(this,MainActivity.class);
+                    Intent i = new Intent(this, MainActivity.class);
                     startActivity(i);
                     //Se guarda el usuario y la contraseña y entra en la app
                     SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString("usuarioLogeado", usuarioIntroducido );
+                    editor.putString("usuarioLogeado", usuarioIntroducido);
                     editor.commit();
                     //SharedPreferences.Editor editor=preferencias.edit();
                     //editor.putString("usuarioLogeado", usuarioIntroducido);
@@ -117,20 +117,12 @@ public class Login extends AppCompatActivity {
                     //editor.commit();
 
                     setContentView(R.layout.activity_main);
-                }
-                else{
+                } else {
                     notificacion = Toast.makeText(this, R.string.invalid_password2, Toast.LENGTH_LONG);
                     notificacion.show();
                     //Se resetean los datos:
                     contrasena.setText("");
                 }
-                if(usuarioCorrecto & contrasenaCorrecta){
-                    notificacion = Toast.makeText(this, "u.getDni()" + u.getDni()+ "usuario.toString()"+usuario.getText(), Toast.LENGTH_LONG);
-                    notificacion.show();
-                }
-
-
-            }
      /*   else{
             //Se resetean los datos:
             usuario.setText("");
@@ -138,15 +130,10 @@ public class Login extends AppCompatActivity {
             notificacion = Toast.makeText(this, R.string.login_failed, Toast.LENGTH_LONG);
             notificacion.show();
         }
-*/}
-    }
-
-    public void registrarse(View view){
-        Toast toast2=Toast.makeText(getApplicationContext(), "Botón registrarse pulsado", Toast.LENGTH_SHORT);
-        toast2.show();
+*/
+            }
+        }}}
 
 
-    }
 
 
-}
