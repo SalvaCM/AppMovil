@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        usuario=(EditText)findViewById(R.id.usuario);
+        usuario=(EditText)findViewById(R.id.contrasena1);
         contrasena=(EditText)findViewById(R.id.contraseña);
 
         SharedPreferences prefs = getSharedPreferences("datos", Context.MODE_PRIVATE);
@@ -143,10 +143,8 @@ public class Login extends AppCompatActivity {
     }
 
     public void registrarse(View view){
-        Toast toast2=Toast.makeText(getApplicationContext(), "Botón registrarse pulsado", Toast.LENGTH_SHORT);
-        toast2.show();
-
-
+        Intent i = new Intent(this,Registro.class);
+        startActivity(i);
     }
 
 

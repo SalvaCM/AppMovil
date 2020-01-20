@@ -16,7 +16,6 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     //pruebas
-    private List<Receta> re;
     private ParseJson parse;
     StringBuilder receta;
     //pruebas

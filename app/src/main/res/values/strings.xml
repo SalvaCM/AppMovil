@@ -48,4 +48,21 @@
     <string name="miPosicion">"Ir a mi posición"</string>
     <string name="miDiezKm">"Ver 10 Km"</string>
     <string name="marcador">"Marcador"</string>
+
+    <!-- Strings related to Registro -->
+    <string name="tituloRegistro">"Introduzca sus datos"</string>
+    <string name="tituloDatosUsu">"Datos de usuario:"</string>
+    <string name="dni">"DNI con letra: "</string>
+    <string name="contrasena1">"Contraseña: "</string>
+    <string name="contrasena2">"Repita su contraseña: "</string>
+
+    <string name="tituloDatosPer">"Datos personales:"</string>
+    <string name="nombre">"Nombre: "</string>
+    <string name="apellidos">"Apellidos: "</string>
+    <string name="telf">"Teléfono: "</string>
+    <string name="email">"Email: "</string>
+    <string name="registrarse">"Registrarse "</string>
+    <string name="cancelar">"Cancelar "</string>
+    <string name="msjUsuarioRegis">"Usuario registrado "</string>
+
 </resources>
