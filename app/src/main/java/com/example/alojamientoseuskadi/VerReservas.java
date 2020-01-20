@@ -24,13 +24,20 @@ public class VerReservas extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_reservas);
 
-        //Se cargan los datos de los alojamientos:
+        //Se cargan los datos de las reservas:
         cargarDatosReservas();
+
+        cargarDatosReservasBBDD();
 
         //Se muestran los datos de los alojamientos:
         //listaAlojamientos.clear();
         mostrarTodasLasReservas();
     }
+
+    public void cargarDatosReservasBBDD(){
+
+    }
+
     public void cargarDatosReservas(){
         InputStream reserv = getResources().openRawResource(R.raw.alojamientos);
         try {

@@ -13,7 +13,8 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -159,33 +160,37 @@ public class HacerReserva extends AppCompatActivity {
     public void hacerReserva(View view)throws SQLException {
         ResultSet rs;
         Statement st = null;
-
+        String sURL="";
+        Toast.makeText(HacerReserva.this,"Conexión Establecida", Toast.LENGTH_LONG).show();
 
         String strFechaActual = fechaActual.format(calendar.getTime());
-        try {
+        try {    boolean estadoConexion = false;
 
             Connection conexionMySQL = null;
-            try {
-                conexionMySQL = DriverManager.getConnection("jdbc:mysql://188.213.5.150" + ":" + "3306" + "/" + "alojamientos", "accesoadatos", "123456");
-            } catch (SQLException e) {
-                e.printStackTrace();
+            String driver = "com.mysql.jdbc.Driver";
+
+           Class.forName(driver).newInstance();
+
+
+
+            conexionMySQL = DriverManager.getConnection("jdbc:mysql://188.213.5.150:3306/alojamientos", "accesoadatos", "123456");
+
+            Toast toast1 =Toast.makeText(getApplicationContext(),"Toast por defecto", Toast.LENGTH_SHORT);
+
+            toast1.show();
+            if(!conexionMySQL.isClosed())
+            {
+                estadoConexion = true;
+                Toast.makeText(HacerReserva.this,"Conexión Establecida", Toast.LENGTH_LONG).show();
             }
 
-            try {
-                st = conexionMySQL.createStatement();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            rs = st.executeQuery("Select cDni from tUsuarios");
-
-            Toast toast3 = Toast.makeText(getApplicationContext(), rs.getString("cDni") + "hola", Toast.LENGTH_SHORT);
-            toast3.show();
-        } catch (SQLException ex) {
-            Log.d("No ha sido posible", ex.getMessage());
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
         }
 
 
-    }
-
-
-    }
+    }}

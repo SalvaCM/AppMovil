@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        usuario=(EditText)findViewById(R.id.usuario);
+        usuario=(EditText)findViewById(R.id.contrasena1);
         contrasena=(EditText)findViewById(R.id.contraseña);
 
         SharedPreferences prefs = getSharedPreferences("datos", Context.MODE_PRIVATE);
@@ -69,21 +69,21 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void iniciar(View view){
+    public void iniciar(View view) {
         Toast toast1 = Toast.makeText(getApplicationContext(), "botón iniciar pulsado", Toast.LENGTH_SHORT);
         toast1.show();
 
-        String usu=usuario.getText().toString();
-        String contr=contrasena.getText().toString();
+        String usu = usuario.getText().toString();
+        String contr = contrasena.getText().toString();
         Toast notificacion;
         SharedPreferences preferencias = getSharedPreferences("datos", Context.MODE_PRIVATE);
 
-        if (usuario.length()<1){
+        if (usuario.length() < 1) {
             notificacion = Toast.makeText(this, R.string.invalid_username, Toast.LENGTH_LONG);
             notificacion.show();
         }
 
-        if (contrasena.length()<1){
+        if (contrasena.length() < 1) {
             notificacion = Toast.makeText(this, R.string.invalid_password, Toast.LENGTH_LONG);
             notificacion.show();
         }
@@ -130,10 +130,12 @@ public class Login extends AppCompatActivity {
             notificacion = Toast.makeText(this, R.string.login_failed, Toast.LENGTH_LONG);
             notificacion.show();
         }
+<
 */
             }
-        }}}
+        }
 
 
+    }}
 
 
