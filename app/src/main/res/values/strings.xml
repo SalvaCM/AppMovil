@@ -65,4 +65,8 @@
     <string name="cancelar">"Cancelar "</string>
     <string name="msjUsuarioRegis">"Usuario registrado "</string>
 
+    <string name="msjError">"Debe rellenar todos los campos para continuar "</string>
+    <string name="msjErrorUsu">"El usuario introducido ya existe. "</string>
+    <string name="msjErrorContr">"Las contraseñas deben ser iguales "</string>
+
 </resources>

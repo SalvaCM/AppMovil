@@ -111,28 +111,25 @@
         android:id="@+id/email"
         android:layout_width="358dp"
         android:layout_height="43dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="63dp"
-        android:layout_marginEnd="24dp"
 
-        android:layout_marginBottom="124dp"
+        android:layout_marginTop="56dp"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/telefono"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/email2"
+        android:id="@+id/nombre"
         android:layout_width="362dp"
         android:layout_height="42dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="17dp"
 
+        android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
         android:hint="@string/nombre"
         android:inputType="textEmailAddress"
@@ -141,15 +138,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:layout_constraintTop_toTopOf="@+id/textView11"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/email3"
+        android:id="@+id/apellidos"
         android:layout_width="362dp"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="59dp"
 
         android:layout_marginEnd="24dp"
         android:hint="@string/apellidos"
@@ -159,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email2"
+        app:layout_constraintTop_toTopOf="@+id/nombre"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
@@ -167,9 +164,9 @@
         android:layout_width="360dp"
         android:layout_height="43dp"
 
-        android:layout_marginTop="6dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginTop="51dp"
 
+        android:layout_marginBottom="196dp"
         android:gravity="left"
         android:hint="@string/telf"
         android:imeOptions="actionDone"
@@ -178,9 +175,10 @@
         android:selectAllOnFocus="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email3"
-        app:layout_constraintVertical_bias="0.057" />
+        app:layout_constraintTop_toTopOf="@+id/apellidos"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/btnRegistrarse"
