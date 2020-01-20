@@ -135,7 +135,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                         .title(a.getNombre().toString())
                         // .snippet("222222")
                         //.icon(BitmapDescriptorFactory.fromResource(R.drawable.place))
-                        .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
+                       .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
                         .anchor(0.5f, 0.5f));
                 mapa.animateCamera(CameraUpdateFactory.newLatLng(posicion));
                 mapa.setOnMapClickListener(this);

@@ -7,12 +7,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -150,22 +156,36 @@ public class HacerReserva extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void hacerReserva(View view){
-        String strFechaActual =  fechaActual.format(calendar.getTime());
+    public void hacerReserva(View view)throws SQLException {
+        ResultSet rs;
+        Statement st = null;
 
-        if(etFechaEntrada.getText().length()==0){
-            toastFecha = Toast.makeText(getApplicationContext(), "@String/toastErrorFecha1" + etFechaEntrada.getText(), Toast.LENGTH_SHORT);
+
+        String strFechaActual = fechaActual.format(calendar.getTime());
+        try {
+
+            Connection conexionMySQL = null;
+            try {
+                conexionMySQL = DriverManager.getConnection("jdbc:mysql://188.213.5.150" + ":" + "3306" + "/" + "alojamientos", "accesoadatos", "123456");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                st = conexionMySQL.createStatement();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            rs = st.executeQuery("Select cDni from tUsuarios");
+
+            Toast toast3 = Toast.makeText(getApplicationContext(), rs.getString("cDni") + "hola", Toast.LENGTH_SHORT);
+            toast3.show();
+        } catch (SQLException ex) {
+            Log.d("No ha sido posible", ex.getMessage());
         }
-        if(etFechaSalida.getText().length()==0){
-            toastFecha = Toast.makeText(getApplicationContext(), "@String/toastErrorFecha2" + etFechaEntrada.getText(), Toast.LENGTH_SHORT);
-        }
-
-        else{
-            toastFecha = Toast.makeText(getApplicationContext(), "botón HacerReserva pulsado." , Toast.LENGTH_SHORT);
-        }
 
 
-
-        toastFecha.show();
     }
-}
+
+
+    }
