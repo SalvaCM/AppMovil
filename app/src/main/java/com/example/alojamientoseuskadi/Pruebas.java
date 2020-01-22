@@ -124,14 +124,14 @@ public class Pruebas extends AppCompatActivity {
                     //String url = "jdbc:mysql://188.213.5.150:3306?";
                     //url += "user=accesoadatos&password=123456";
 
-                    String url =  "jdbc:mysql://192.168.101.24:3306/alojamientos?serverTimezone=UTC";
+                    String url =  "jdbc:mysql://188.213.5.150:3306/alojamientos?serverTimezone=UTC";
                     //url = "Server=188.213.5.150;Port=3306;Database=alojamientos;Uid=accesoadatos;Pwd=123456;";
-                    java.sql.Connection con = DriverManager.getConnection(url);
+                    java.sql.Connection con = DriverManager.getConnection(url,"accesoadatos","123456");
 
 
                     // our SQL SELECT query.
                     // if you only need a few columns, specify them by name instead of using "*"
-                    String query = "SELECT * FROM tusuarios";
+                    String query = "SELECT * FROM tUsuarios";
 
                     // create the java statement
                     Statement st = con.createStatement();
