@@ -134,8 +134,11 @@ public class Login extends AppCompatActivity {
 */
             }
         }
-
-
-    }}
+    }
+    public void registrarse(View view){
+        Intent i = new Intent(this, Registro.class);
+        startActivity(i);
+    }
+}
 
 
