@@ -86,7 +86,7 @@ public class HacerReserva extends AppCompatActivity {
         webAloj.setText(webAlojSeleccionado);
         emailAloj= findViewById(R.id.tvEmail);
         emailAloj.setText(emailAlojSeleccionado);
-
+s
         //Fecha de entrada:
         etFechaEntrada = findViewById(R.id.fechaEntrada);
         etFechaEntrada.setOnClickListener(new View.OnClickListener() {
