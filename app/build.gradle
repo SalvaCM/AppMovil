@@ -32,5 +32,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 
-    implementation project(path: ':mysql-connector-java-8.0.18')
+    implementation files('libs/mysql-connector-java-5.1.48.jar')
 }
