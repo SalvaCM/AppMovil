@@ -17,10 +17,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pruebas extends AppCompatActivity {
-    private List<Reserva> listaReservas;
+    public List<Reserva> listaReservasBBDD = new ArrayList<Reserva>();
     //pruebas
 
     private List<Usuario> listaUsuarios;
@@ -117,7 +118,7 @@ public class Pruebas extends AppCompatActivity {
 
                        Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
 
-                       // listaReservas.add(reserva);
+                        listaReservasBBDD.add(reserva);
                         // print the results
                         System.out.format("%s \n", codReserva, codUsuario);
                        //TV_mensaje.setText("Progreso descarga: "+codUsuario);
