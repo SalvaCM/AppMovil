@@ -117,10 +117,10 @@ public class Pruebas extends AppCompatActivity {
 
                        Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
 
-                        listaReservas.add(reserva);
+                       // listaReservas.add(reserva);
                         // print the results
                         System.out.format("%s \n", codReserva, codUsuario);
-                       TV_mensaje.setText("Progreso descarga: "+codUsuario);
+                       //TV_mensaje.setText("Progreso descarga: "+codUsuario);
                     }
 
 

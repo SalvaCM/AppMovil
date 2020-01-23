@@ -2,7 +2,9 @@ package com.example.alojamientoseuskadi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -69,6 +71,8 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent)
             {    }
         });
+
+
 
         //Cuando selecciona algún alojamiento:
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){

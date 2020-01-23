@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity {
         usuario=(EditText)findViewById(R.id.contrasena1);
         contrasena=(EditText)findViewById(R.id.contraseña);
 
+        //Se guarda el usuario que se ha logueado que está guardado en la clase SharedPreferences
         SharedPreferences prefs = getSharedPreferences("datos", Context.MODE_PRIVATE);
         usuario.setText(prefs.getString("usuario", ""));
         contrasena.setText(prefs.getString("contrasena", ""));
