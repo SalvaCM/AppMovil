@@ -35,6 +35,8 @@ public class VerReservas extends AppCompatActivity {
     public int reservaSelecc;
     ArrayAdapter<Reserva> adapter;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,23 +86,17 @@ public class VerReservas extends AppCompatActivity {
         @Override
         protected List<Reserva> doInBackground(String... variableNoUsada) {
 
-            int cantidadImagenesDescargadas = 0;
-            float progreso = 0.0f;
-
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                //String url = "jdbc:mysql://188.213.5.150:3306?";
-                //url += "user=accesoadatos&password=123456";
 
                 String url =  "jdbc:mysql://188.213.5.150:3306/alojamientos?serverTimezone=UTC";
                 //url = "Server=188.213.5.150;Port=3306;Database=alojamientos;Uid=accesoadatos;Pwd=123456;";
                 java.sql.Connection con = DriverManager.getConnection(url,"accesoadatos","123456");
 
+                //String query = "SELECT * FROM tReservas";
 
-                // our SQL SELECT query.
-                // if you only need a few columns, specify them by name instead of using "*"
-                String query = "SELECT * FROM tReservas";
-
+                //FALTA: and R.cCodUsuario='" & usuarioLogeado.ToString & "'"
+                String query = "select R.cReserva, R.cFechaEntrada, R.cFechaSalida, R.cFechaRealizada, R.cCodUsuario,U.cNombre 'NombreUsuario' ,U.cApellidos, U.cTelefono 'telfUsuario', R.cCodAlojamiento,A.cNombre 'NombreAlojamiento', A.cDireccion, A.cLocalizacion, A.cEmail, A.cTelefono 'telfAloj', A.cWeb, A.cTipo, A.cCapacidad, A.cDescripcion, A.cLatitud, A.cLongitud, A.cLocalidad    from tReservas R, tAlojamientos A, tUsuarios U where R.cCodAlojamiento=A.cCodAlojamiento and R.cCodUsuario=U.cDni";
                 // create the java statement
                 Statement st = con.createStatement();
 
@@ -110,6 +106,28 @@ public class VerReservas extends AppCompatActivity {
                 // iterate through the java resultset
                 while (rs.next())
                 {
+                    //Datos usuario:
+                    String nombreUsuario = rs.getString("NombreUsuario");
+                    String apellidosUsuario = rs.getString("cApellidos");
+                    String telfUsuario = rs.getString("telfUsuario");
+
+                    //Datos alojamiento:
+                    String nombreAloj = rs.getString("NombreAlojamiento");
+                    String direccionAloj = rs.getString("cDireccion");
+                    String localizacionAloj = rs.getString("cLocalizacion");
+                    String emailAloj = rs.getString("cEmail");
+                    String webAloj = rs.getString("cWeb");
+                    String telfAloj = rs.getString("telfAloj");
+                    //A.cTipo, A.cCapacidad, A.cDescripcion, A.cLatitud, A.cLongitud, A.cLocalidad
+                    String tipoAloj = rs.getString("cTipo");
+                    int capacidadAloj = rs.getInt("cCapacidad");
+                    String descripcionAloj = rs.getString("cDescripcion");
+                    String latitudAloj = rs.getString("cLatitud");
+                    String longitudAloj = rs.getString("cLongitud");
+                    String localidadAloj = rs.getString("cLocalidad");
+
+
+                    //Datos reserva:
                     int codReserva = rs.getInt("cReserva");
                     int codAlojamiento = rs.getInt("cCodAlojamiento");
                     String codUsuario = rs.getString("cCodUsuario");
@@ -117,8 +135,10 @@ public class VerReservas extends AppCompatActivity {
                     String fechaEntrada = rs.getString("cFechaEntrada");
                     String fechaSalida = rs.getString("cFechaSalida");
 
-                    Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
+                    Usuario usuarioLogeado = new Usuario(codUsuario, nombreUsuario, apellidosUsuario, telfUsuario);
+                    Alojamiento alojamiento = new Alojamiento(codAlojamiento, nombreAloj, direccionAloj, telfAloj, tipoAloj, webAloj, capacidadAloj, descripcionAloj, emailAloj, latitudAloj, longitudAloj, localidadAloj, localizacionAloj);
 
+                    Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
                     listaReservas.add(reserva);
                     // print the results
                     System.out.format("%s \n", codReserva, codAlojamiento,  codUsuario);

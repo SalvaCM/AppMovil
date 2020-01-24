@@ -22,7 +22,7 @@ public class Login extends AppCompatActivity {
     private EditText contrasena;
     private boolean usuarioCorrecto = false;
     private boolean contrasenaCorrecta = false;
-    private String usuarioIntroducido;
+    public static String usuarioIntroducido;
     private String contrasenaIntroducida;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
