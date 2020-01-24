@@ -71,4 +71,7 @@
 
     <!-- Strings related to verreserva -->
     <string name="tituloVerReserv">"Detalles de su reserva"</string>
+    <string name="tituloVerReserv2">"Detalles de la reserva"</string>
+    <string name="tituloVerReserv3">"Detalles del alojamiento"</string>
+    <string name="titulocodigo">"Código de la reserva:"</string>
 </resources>
