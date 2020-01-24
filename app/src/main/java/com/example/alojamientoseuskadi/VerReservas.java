@@ -240,6 +240,16 @@ public class VerReservas extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("codReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getCodReserva()));
+        editor.putString("fechaRealizadaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaRealizada()));
+        editor.putString("fechaEntradaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaEntrada()));
+        editor.putString("fechaSalidaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaSalida()));
+
+        editor.putString("nombreAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getNombre()));
+        editor.putString("descripAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getDescripcion()));
+        editor.putString("localidadAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getLocalidad()));
+        editor.putString("telfAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getTelefono()));
+        editor.putString("emailAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getEmail()));
+        editor.putString("webAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getWeb()));
         editor.commit();
 
         Intent i = new Intent(this, VerReserva.class);

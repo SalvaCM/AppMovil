@@ -169,7 +169,7 @@
         android:autoLink="map"/>
 
     <TextView
-        android:id="@+id/tvUsuarioLog"
+        android:id="@+id/tvcodReservaLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoLink="map"
@@ -246,7 +246,7 @@
         app:srcCompat="@drawable/ic_internet" />
 
     <TextView
-        android:id="@+id/tvUsuarioLog"
+        android:id="@+id/tvcodReservaLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"

@@ -69,4 +69,6 @@
     <string name="msjErrorUsu">"El usuario introducido ya existe. "</string>
     <string name="msjErrorContr">"Las contraseñas deben ser iguales "</string>
 
+    <!-- Strings related to verreserva -->
+    <string name="tituloVerReserv">"Detalles de su reserva"</string>
 </resources>

@@ -70,8 +70,9 @@ public class HacerReserva extends AppCompatActivity {
         //Se saca el usuario que se ha logueado que está guardado en la clase SharedPreferences
         SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
         String nombre = settings.getString("usuarioLogeado", "");
-        usuarioLog = findViewById(R.id.tvUsuarioLog);
-        usuarioLog.setText(nombre);
+
+        //usuarioLog = findViewById(R.id.tvUsuarioLog);
+//        usuarioLog.setText(nombre);
 
         //Se rellenan los datos del activity con los datos que hemos pasado:
         nombreAloj = findViewById(R.id.tvNombre);
