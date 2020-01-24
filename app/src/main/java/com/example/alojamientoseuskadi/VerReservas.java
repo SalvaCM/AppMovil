@@ -136,7 +136,7 @@ public class VerReservas extends AppCompatActivity {
                     String fechaSalida = rs.getString("cFechaSalida");
 
                     Usuario usuarioLogeado = new Usuario(codUsuario, nombreUsuario, apellidosUsuario, telfUsuario);
-                    Alojamiento alojamiento = new Alojamiento(codAlojamiento, nombreAloj, direccionAloj, telfAloj, tipoAloj, webAloj, capacidadAloj, descripcionAloj, emailAloj, latitudAloj, longitudAloj, localidadAloj, localizacionAloj);
+                   // Alojamiento alojamiento = new Alojamiento(codAlojamiento, nombreAloj, direccionAloj, telfAloj, tipoAloj, webAloj, capacidadAloj, descripcionAloj, emailAloj, latitudAloj, longitudAloj, localidadAloj, localizacionAloj);
 
                     Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
                     listaReservas.add(reserva);

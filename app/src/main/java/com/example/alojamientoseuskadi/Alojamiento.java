@@ -29,10 +29,10 @@ public class Alojamiento {
     public Alojamiento() {
     }
 
-    public Alojamiento(int codAlojamiento, String nombre, String direccion, String telefono, String tipo, String web, int capacidad, String descripcion, String email, String latitud, String longitud, String localidad, String localizacion) {
+    public Alojamiento(int codAlojamiento, String nombre, String telefono, String tipo, String web, int capacidad, String descripcion, String email, String latitud, String longitud, String localidad, String localizacion) {
         this.codAlojamiento = codAlojamiento;
         this.nombre = nombre;
-        this.direccion=direccion;
+        //this.direccion=direccion;
         this.telefono = telefono;
         this.tipo = tipo;
         this.web = web;
