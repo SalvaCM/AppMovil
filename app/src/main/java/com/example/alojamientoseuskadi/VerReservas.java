@@ -3,7 +3,9 @@ package com.example.alojamientoseuskadi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import java.util.List;
 
 public class VerReservas extends AppCompatActivity {
     public List<Reserva> listaReservas = new ArrayList<Reserva>();
+    public List<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
     private final boolean CANCELAR_SI_MAS_DE_100_IMAGENES = false;//se encargará de decir si cancelamos o no la descarga al pasa de 100 imágenes.
     private final String TAG_LOG = "test";//El tag del log para que veamos por consola lo que va haciendo nuestra aplicación.
     private TextView TV_mensaje; //Y el TextView que será el que muestre el mensaje que cambia de color.
@@ -35,7 +38,36 @@ public class VerReservas extends AppCompatActivity {
     public int reservaSelecc;
     ArrayAdapter<Reserva> adapter;
 
+    private int posicionReservaSelecc;
 
+    //variables:
+    //Datos usuario:
+    String nombreUsuario;
+    String apellidosUsuario;
+    String telfUsuario;
+
+    //Datos alojamiento:
+    String nombreAloj;
+    String direccionAloj;
+    String localizacionAloj;
+    String emailAloj;
+    String webAloj;
+    String telfAloj;
+    String tipoAloj;
+    int capacidadAloj;
+    String descripcionAloj;
+    String latitudAloj;
+    String longitudAloj;
+    String localidadAloj;
+
+
+    //Datos reserva:
+    int codReserva;
+    int codAlojamiento ;
+    String codUsuario ;
+    String fechaRealizada ;
+    String fechaEntrada ;
+    String fechaSalida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,42 +139,44 @@ public class VerReservas extends AppCompatActivity {
                 while (rs.next())
                 {
                     //Datos usuario:
-                    String nombreUsuario = rs.getString("NombreUsuario");
-                    String apellidosUsuario = rs.getString("cApellidos");
-                    String telfUsuario = rs.getString("telfUsuario");
+                    nombreUsuario = rs.getString("NombreUsuario");
+                    apellidosUsuario = rs.getString("cApellidos");
+                    telfUsuario = rs.getString("telfUsuario");
 
                     //Datos alojamiento:
-                    String nombreAloj = rs.getString("NombreAlojamiento");
-                    String direccionAloj = rs.getString("cDireccion");
-                    String localizacionAloj = rs.getString("cLocalizacion");
-                    String emailAloj = rs.getString("cEmail");
-                    String webAloj = rs.getString("cWeb");
-                    String telfAloj = rs.getString("telfAloj");
+                    nombreAloj = rs.getString("NombreAlojamiento");
+                    direccionAloj = rs.getString("cDireccion");
+                    localizacionAloj = rs.getString("cLocalizacion");
+                    emailAloj = rs.getString("cEmail");
+                    webAloj = rs.getString("cWeb");
+                    telfAloj = rs.getString("telfAloj");
                     //A.cTipo, A.cCapacidad, A.cDescripcion, A.cLatitud, A.cLongitud, A.cLocalidad
-                    String tipoAloj = rs.getString("cTipo");
-                    int capacidadAloj = rs.getInt("cCapacidad");
-                    String descripcionAloj = rs.getString("cDescripcion");
-                    String latitudAloj = rs.getString("cLatitud");
-                    String longitudAloj = rs.getString("cLongitud");
-                    String localidadAloj = rs.getString("cLocalidad");
+                    tipoAloj = rs.getString("cTipo");
+                    capacidadAloj = rs.getInt("cCapacidad");
+                    descripcionAloj = rs.getString("cDescripcion");
+                    latitudAloj = rs.getString("cLatitud");
+                    longitudAloj = rs.getString("cLongitud");
+                    localidadAloj = rs.getString("cLocalidad");
 
 
                     //Datos reserva:
-                    int codReserva = rs.getInt("cReserva");
-                    int codAlojamiento = rs.getInt("cCodAlojamiento");
-                    String codUsuario = rs.getString("cCodUsuario");
-                    String fechaRealizada = rs.getString("cFechaRealizada");
-                    String fechaEntrada = rs.getString("cFechaEntrada");
-                    String fechaSalida = rs.getString("cFechaSalida");
+                    codReserva = rs.getInt("cReserva");
+                    codAlojamiento = rs.getInt("cCodAlojamiento");
+                    codUsuario = rs.getString("cCodUsuario");
+                    fechaRealizada = rs.getString("cFechaRealizada");
+                    fechaEntrada = rs.getString("cFechaEntrada");
+                    fechaSalida = rs.getString("cFechaSalida");
 
                     Usuario usuarioLogeado = new Usuario(codUsuario, nombreUsuario, apellidosUsuario, telfUsuario);
+
                     Alojamiento alojamiento = new Alojamiento(codAlojamiento, nombreAloj, direccionAloj, telfAloj, tipoAloj, webAloj, capacidadAloj, descripcionAloj, emailAloj, latitudAloj, longitudAloj, localidadAloj, localizacionAloj);
+                    listaAlojamientos.add(alojamiento);
 
                     Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
                     listaReservas.add(reserva);
                     // print the results
                     System.out.format("%s \n", codReserva, codAlojamiento,  codUsuario);
-                   
+
                 }
                 st.close();
             } catch (ClassNotFoundException e) {
@@ -191,10 +225,10 @@ public class VerReservas extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
 
                 //cambiar por codAdlojamiento??
+                posicionReservaSelecc = posicion;
                 reservaSelecc = listaReservas.get(posicion).getCodReserva();
 
                 irADetallesVerReserva(posicion);
-
             }
         });
 
@@ -202,9 +236,17 @@ public class VerReservas extends AppCompatActivity {
 
     }
     public void irADetallesVerReserva(int pos){
+
+        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("codReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getCodReserva()));
+        editor.commit();
+
         Intent i = new Intent(this, VerReserva.class);
-        // i.putExtra("nombreTarea", listaTareas.get(pos));//para mandar un dato a otra actividad
-        //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
+
+        //Se le pasa a la Actividad: Ver reserva los datos de la reserva seleccionada:
+        i.putExtra("codReservaSelec",listaReservas.get(posicionReservaSelecc).getCodReserva());
+
         startActivity(i);
     }
 }
