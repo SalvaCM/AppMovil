@@ -2,6 +2,7 @@ package com.example.alojamientoseuskadi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,11 +17,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Pruebas extends AppCompatActivity {
-
+    public List<Reserva> listaReservasBBDD = new ArrayList<Reserva>();
     //pruebas
+
     private List<Usuario> listaUsuarios;
     private ParseJson parse1;
 
@@ -32,25 +35,13 @@ public class Pruebas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pruebas);
+        setContentView(R.layout.activity_ver_reservas);
+        new ConnectMySqlBBDD().execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
 
-        TV_mensaje = (TextView) findViewById(R.id.TextView_mensajesAlUsuario);
 
-        Button B_probarHacerDosCosasALaVez = (Button) findViewById(R.id.button_probarComoPodemosHacerOtraCosa);
-        B_probarHacerDosCosasALaVez.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.v(TAG_LOG, "...Haciendo otra cosa el usuario sobre el hilo PRINCIPAL a la vez que carga...");
-                Toast toast = Toast.makeText(getApplicationContext(), "...Haciendo otra cosa el usuario sobre el hilo PRINCIPAL a la vez que carga...", Toast.LENGTH_SHORT);
-                toast.show();
-            }
-        });
-
-        new ConnectMySql(CANCELAR_SI_MAS_DE_100_IMAGENES).execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
-
+        mostrarTodasLasReservas();
     }
-
-    private class ConnectMySql extends AsyncTask<String, Void, String> {
+    public class ConnectMySqlBBDD extends AsyncTask<String, Void, List<Reserva> > {
         private boolean cancelarSiHayMas100Archivos;
         private ProgressBar miBarraDeProgreso;
         String res = "";
@@ -60,10 +51,9 @@ public class Pruebas extends AppCompatActivity {
          *
          * en este ejemplo le pasamos un booleano que indica si hay más de 100 archivos o no. Si le pasas true se cancela por la mitad del progreso, si le pasas false seguirá hasta el final sin cancelar la descarga simulada
          */
-        public ConnectMySql(boolean cancelarSiHayMas100Archivos) {
-            this.cancelarSiHayMas100Archivos = cancelarSiHayMas100Archivos;
-        }
+        public ConnectMySqlBBDD() {
 
+        }
         /**
          * Se ejecuta antes de empezar el hilo en segundo plano. Después de este se ejecuta el método "doInBackground" en Segundo Plano
          *
@@ -71,10 +61,8 @@ public class Pruebas extends AppCompatActivity {
          */
         @Override
         protected void onPreExecute() {
-            TV_mensaje.setText("ANTES de EMPEZAR la descarga. Hilo PRINCIPAL");
-            Log.v(TAG_LOG, "ANTES de EMPEZAR la descarga. Hilo PRINCIPAL");
 
-            miBarraDeProgreso = (ProgressBar) findViewById(R.id.progressBar_indicador);
+            Log.v(TAG_LOG, "ANTES de EMPEZAR la descarga. Hilo PRINCIPAL");
 
             super.onPreExecute();
 
@@ -88,98 +76,64 @@ public class Pruebas extends AppCompatActivity {
          * param array con los valores pasados en "execute"
          * @return devuelve un valor al terminar de ejecutar este segundo plano. Se lo envía y ejecuta "onPostExecute" si ha termiado, o a "onCancelled" si se ha cancelado con "cancel"
          */
+        @SuppressLint("WrongThread")
         @Override
-        protected String doInBackground(String... variableNoUsada) {
+        protected List<Reserva> doInBackground(String... variableNoUsada) {
 
             int cantidadImagenesDescargadas = 0;
             float progreso = 0.0f;
 
-            //Suponemos que tenemos 200 imágenes en algún lado de Internet. isCancelled() comprueba si hemos cancelado con cancel() el hilo en segundo plano.
-            while (!isCancelled() && cantidadImagenesDescargadas<200){
-                cantidadImagenesDescargadas++;
-                Log.v(TAG_LOG, "Imagen descargada número "+cantidadImagenesDescargadas+". Hilo en SEGUNDO PLANO");
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                //String url = "jdbc:mysql://188.213.5.150:3306?";
+                //url += "user=accesoadatos&password=123456";
 
-                //Simulamos la descarga de una imagen. Iría aquí el código........................
-                try {
-                    //Simula el tiempo aleatorio de descargar una imagen, al dormir unos milisegundos aleatorios al hilo en segundo plano
-                    Thread.sleep((long) (Math.random()*10));
-                } catch (InterruptedException e) {
-                    cancel(true); //Cancelamos si entramos al catch porque algo ha ido mal
-                    e.printStackTrace();
+                String url =  "jdbc:mysql://188.213.5.150:3306/alojamientos?serverTimezone=UTC";
+                //url = "Server=188.213.5.150;Port=3306;Database=alojamientos;Uid=accesoadatos;Pwd=123456;";
+                java.sql.Connection con = DriverManager.getConnection(url,"accesoadatos","123456");
+
+
+                // our SQL SELECT query.
+                // if you only need a few columns, specify them by name instead of using "*"
+                String query = "SELECT * FROM tReservas";
+
+                // create the java statement
+                Statement st = con.createStatement();
+
+                // execute the query, and get a java resultset
+                ResultSet rs = st.executeQuery(query);
+
+                // iterate through the java resultset
+                while (rs.next())
+                {
+                    int codReserva = rs.getInt("cReserva");
+                    int codAlojamiento = rs.getInt("cCodAlojamiento");
+                    String codUsuario = rs.getString("cCodUsuario");
+                    String fechaRealizada = rs.getString("cFechaRealizada");
+                    String fechaEntrada = rs.getString("cFechaEntrada");
+                    String fechaSalida = rs.getString("cFechaSalida");
+
+                    Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
+
+                    listaReservas.add(reserva);
+                    // print the results
+                    System.out.format("%s \n", codReserva, codAlojamiento,  codUsuario);
+                    //TV_mensaje.setText("Progreso descarga: "+codUsuario);
                 }
-                //Simulamos la descarga de una imagen. Iría aquí el código........................
-
-                progreso+=0.5;
-
-                //Enviamos el progreso a "onProgressUpdate" para que se lo muestre al usuario, pues en el hilo principal no podemos llamar a nada de la interfaz
-               // publishProgress(progreso);
-
-                //Si hemos decidido cancelar al pasar de 100 imágenes descargadas entramos aquí.
-                if (cancelarSiHayMas100Archivos && cantidadImagenesDescargadas>100){
-                    cancel(true);
-                }
-
-                try {
-                    Class.forName("com.mysql.jdbc.Driver");
-                    //String url = "jdbc:mysql://188.213.5.150:3306?";
-                    //url += "user=accesoadatos&password=123456";
-
-                    String url =  "jdbc:mysql://188.213.5.150:3306/alojamientos?serverTimezone=UTC";
-                    //url = "Server=188.213.5.150;Port=3306;Database=alojamientos;Uid=accesoadatos;Pwd=123456;";
-                    java.sql.Connection con = DriverManager.getConnection(url,"accesoadatos","123456");
-
-
-                    // our SQL SELECT query.
-                    // if you only need a few columns, specify them by name instead of using "*"
-                    String query = "SELECT * FROM tUsuarios";
-
-                    // create the java statement
-                    Statement st = con.createStatement();
-
-                    // execute the query, and get a java resultset
-                    ResultSet rs = st.executeQuery(query);
-
-                    // iterate through the java resultset
-                    while (rs.next())
-                    {
-
-                        String firstName = rs.getString("cDni");
-
-
-                        // print the results
-                        System.out.format("%s \n", firstName);
-                    }
-                    st.close();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-             catch (Exception e) {
+                st.close();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
-finally {
-                    String asd = "";
-                }
-
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            finally {
+                String asd = "";
             }
 
-            return res;
-        }
-
-        /**
-         * Se ejecuta después de que en "doInBackground" ejecute el método "publishProgress".
-         *
-         * Se ejecuta en el hilo: PRINCIPAL
-         *
-         * param array con los valores pasados en "publishProgress"
-         */
-        //@Override
-        protected void onProgressUpdate(Float... porcentajeProgreso) {
-            TV_mensaje.setText("Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
-            Log.v(TAG_LOG, "Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
-
-            miBarraDeProgreso.setProgress( Math.round(porcentajeProgreso[0]) );
+            return listaReservas;
         }
 
         /**
@@ -189,29 +143,45 @@ finally {
          *
          * param array con los valores pasados por el return de "doInBackground".
          */
-       // @Override
-        protected void onPostExecute(Integer cantidadProcesados) {
-            TV_mensaje.setText("DESPUÉS de TERMINAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
-            Log.v(TAG_LOG, "DESPUÉS de TERMINAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
+        // @Override
+        protected void onPostExecute(List<Reserva> cantidadProcesados) {
+            listaReservas = cantidadProcesados;
+            adapter.notifyDataSetChanged();
 
-            TV_mensaje.setTextColor(Color.GREEN);
         }
+    }
 
-        /**
-         * Se ejecuta si se ha llamado al método "cancel" y después de terminar "doInBackground". Por lo que se ejecuta en vez de "onPostExecute"
-         * Nota: Este onCancelled solo funciona a partir de Android 3.0 (Api Level 11 en adelante). En versiones anteriores onCancelled no funciona
-         *
-         * Se ejecuta en el hilo: PRINCIPAL
-         *
-         * param array con los valores pasados por el return de "doInBackground".
-         */
-        //@Override
-        protected void onCancelled (Integer cantidadProcesados) {
-            TV_mensaje.setText("DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
-            Log.v(TAG_LOG, "DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
 
-            TV_mensaje.setTextColor(Color.RED);
-        }
+    public void mostrarTodasLasReservas(){
+s        lvVerReservas = (ListView)findViewById(R.id.lvVerReservas);
+        registerForContextMenu(lvVerReservas);//Se debe “registrar” el ContextMenu , por lo que se añadirá la siguiente línea al método onCreate.
+
+        adapter = new ArrayAdapter<Reserva>(this, android.R.layout.simple_list_item_1, listaReservas);
+        lvVerReservas.setAdapter(adapter);
+        lvVerReservas.setLongClickable(true);
+        lvVerReservas.setClickable(true);
+
+        //Cuando se hace click en una tarea:
+        lvVerReservas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int posicion, long id) {
+
+                //cambiar por codAdlojamiento??
+                reservaSelecc = listaReservas.get(posicion).getCodReserva();
+
+                irADetallesVerReserva(posicion);
+
+            }
+        });
+
+
 
     }
+    public void irADetallesVerReserva(int pos){
+        Intent i = new Intent(this, VerReserva.class);
+        // i.putExtra("nombreTarea", listaTareas.get(pos));//para mandar un dato a otra actividad
+        //  i.putExtra("nombreAlojamiento", listaAlojamientos.get(pos));//para mandar un dato a otra actividad
+        startActivity(i);
+    }
+
 }

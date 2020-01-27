@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Entidad implements Serializable {
     private int imgFoto;
-    private int id;
+    private int codAlojamiento;
     private String titulo;
     private String contenido;
     private String telefono;
@@ -13,8 +13,8 @@ public class Entidad implements Serializable {
     private String localidad;
     private String email;
 
-    public Entidad(int id, int imgFoto, String titulo, String contenido, String telefono, String web, String desc, String localidad, String email) {
-        this.id = id;
+    public Entidad(int codAlojamiento, int imgFoto, String titulo, String contenido, String telefono, String web, String desc, String localidad, String email) {
+        this.codAlojamiento = codAlojamiento;
         this.imgFoto = imgFoto;
         this.titulo = titulo;
         this.contenido = contenido;
@@ -65,13 +65,9 @@ public class Entidad implements Serializable {
         this.web = web;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getcodAlojamiento() {return codAlojamiento;}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setcodAlojamiento(int codAlojamiento) {this.codAlojamiento = codAlojamiento;}
 
     public String getDesc() {
         return desc;
