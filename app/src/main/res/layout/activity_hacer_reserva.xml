@@ -128,7 +128,7 @@
         app:layout_constraintVertical_bias="0.931" />
 
     <Button
-        android:id="@+id/btnReservar"
+        android:id="@+id/btnBorrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -153,23 +153,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
-
     <TextView
         android:id="@+id/tvlocalidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
-        android:textSize="14sp"
+        android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintHorizontal_bias="0.313"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37"
-        android:autoLink="map"/>
+        app:layout_constraintVertical_bias="0.615" />
+
 
     <TextView
-        android:id="@+id/tvUsuarioLog"
+        android:id="@+id/tvcodReservaLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:autoLink="map"
@@ -246,7 +245,7 @@
         app:srcCompat="@drawable/ic_internet" />
 
     <TextView
-        android:id="@+id/tvUsuarioLog"
+        android:id="@+id/tvcodReservaLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"

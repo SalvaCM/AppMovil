@@ -56,6 +56,8 @@ public class ParseJson {
                 reader.skipValue();
             }
         }
+
+
         reader.endObject();
         return new Usuario(dni,nombre, apellidos, contrasena);
     }
@@ -129,6 +131,7 @@ public class ParseJson {
             }else {
                 reader.skipValue();
             }
+
         }
         reader.endObject();
         return new Alojamiento(codAlojamiento, nombre, telefono, tipo, web, capacidad, descripcion, email, latitud, longitud, localidad, localizacion) ;

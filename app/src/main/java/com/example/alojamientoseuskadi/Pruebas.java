@@ -35,8 +35,12 @@ public class Pruebas extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ver_reservas);
-        new ConnectMySqlBBDD().execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
+
+        setContentView(R.layout.activity_pruebas);
+
+        TV_mensaje = (TextView) findViewById(R.id.TextView_mensajesAlUsuario);
+
+        new ConnectMySql(CANCELAR_SI_MAS_DE_100_IMAGENES).execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
 
 
         mostrarTodasLasReservas();
@@ -62,7 +66,6 @@ public class Pruebas extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
 
-            Log.v(TAG_LOG, "ANTES de EMPEZAR la descarga. Hilo PRINCIPAL");
 
             super.onPreExecute();
 
@@ -83,22 +86,23 @@ public class Pruebas extends AppCompatActivity {
             int cantidadImagenesDescargadas = 0;
             float progreso = 0.0f;
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                //String url = "jdbc:mysql://188.213.5.150:3306?";
-                //url += "user=accesoadatos&password=123456";
 
-                String url =  "jdbc:mysql://188.213.5.150:3306/alojamientos?serverTimezone=UTC";
-                //url = "Server=188.213.5.150;Port=3306;Database=alojamientos;Uid=accesoadatos;Pwd=123456;";
-                java.sql.Connection con = DriverManager.getConnection(url,"accesoadatos","123456");
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    //String url = "jdbc:mysql://188.213.5.150:3306?";
+                    //url += "user=accesoadatos&password=123456";
+
 
 
                 // our SQL SELECT query.
                 // if you only need a few columns, specify them by name instead of using "*"
                 String query = "SELECT * FROM tReservas";
 
-                // create the java statement
-                Statement st = con.createStatement();
+
+                    // our SQL SELECT query.
+                    // if you only need a few columns, specify them by name instead of using "*"
+                    String query = "SELECT * FROM tReservas";
+
 
                 // execute the query, and get a java resultset
                 ResultSet rs = st.executeQuery(query);
@@ -113,27 +117,57 @@ public class Pruebas extends AppCompatActivity {
                     String fechaEntrada = rs.getString("cFechaEntrada");
                     String fechaSalida = rs.getString("cFechaSalida");
 
-                    Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
 
-                    listaReservas.add(reserva);
-                    // print the results
-                    System.out.format("%s \n", codReserva, codAlojamiento,  codUsuario);
-                    //TV_mensaje.setText("Progreso descarga: "+codUsuario);
+                    // iterate through the java resultset
+                    while (rs.next())
+                    {
+                        int codReserva = rs.getInt("cReserva");
+                        int codAlojamiento = rs.getInt("cCodAlojamiento");
+                        String codUsuario = rs.getString("cCodUsuario");
+                        String fechaRealizada = rs.getString("cFechaRealizada");
+                        String fechaEntrada = rs.getString("cFechaEntrada");
+                        String fechaSalida = rs.getString("cFechaSalida");
+
+                       Reserva reserva = new Reserva(codReserva, codAlojamiento, codUsuario, fechaRealizada, fechaEntrada, fechaSalida);
+
+                        listaReservasBBDD.add(reserva);
+                        // print the results
+                        System.out.format("%s \n", codReserva, codUsuario);
+                       //TV_mensaje.setText("Progreso descarga: "+codUsuario);
+                    }
+
+
+
+                    st.close();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-                st.close();
-            } catch (ClassNotFoundException e) {
+                catch (Exception e) {
                 e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
-            finally {
-                String asd = "";
-            }
+                }
+                finally {
+                    String asd = "";
+                }
 
-            return listaReservas;
+            return res;
+        }
+
+        /**
+         * Se ejecuta después de que en "doInBackground" ejecute el método "publishProgress".
+         *
+         * Se ejecuta en el hilo: PRINCIPAL
+         *
+         * param array con los valores pasados en "publishProgress"
+         */
+        //@Override
+        protected void onProgressUpdate(Float... porcentajeProgreso) {
+            TV_mensaje.setText("Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
+            Log.v(TAG_LOG, "Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
+
+            miBarraDeProgreso.setProgress( Math.round(porcentajeProgreso[0]) );
+
         }
 
         /**

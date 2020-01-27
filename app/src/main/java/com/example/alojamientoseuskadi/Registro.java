@@ -41,7 +41,9 @@ public class Registro extends AppCompatActivity {
         telefono=(EditText)findViewById(R.id.telefono);
         email=(EditText)findViewById(R.id.email);
     }
+
     // ************************************* INICIO BOTON REGISTRARSE **********************************
+
     public void btnRegistrarse(View view){
         String regex = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);
@@ -206,4 +208,6 @@ public class Registro extends AppCompatActivity {
     // ************************************ FIN FORMATO DNI *************************************
 
 
+
 }
+

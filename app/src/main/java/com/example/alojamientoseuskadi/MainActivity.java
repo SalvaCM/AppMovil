@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         if (id==R.id.opcion2) {
-            Intent i = new Intent(this,Pruebas.class);
+            Intent i = new Intent(this,VerReservas.class);
             startActivity(i);
         }
         if (id==R.id.opcion3) {

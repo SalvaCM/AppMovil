@@ -209,14 +209,14 @@ public class HacerReserva extends AppCompatActivity {
             super.onPreExecute();
 
         }
-            /**
-             * Se ejecuta después de "onPreExecute". Se puede llamar al hilo Principal con el método "publishProgress" que ejecuta el método "onProgressUpdate" en hilo Principal
-             *
-             * Se ejecuta en el hilo: EN SEGUNDO PLANO
-             *
-             * param array con los valores pasados en "execute"
-             * @return devuelve un valor al terminar de ejecutar este segundo plano. Se lo envía y ejecuta "onPostExecute" si ha termiado, o a "onCancelled" si se ha cancelado con "cancel"
-             */
+        /**
+         * Se ejecuta después de "onPreExecute". Se puede llamar al hilo Principal con el método "publishProgress" que ejecuta el método "onProgressUpdate" en hilo Principal
+         *
+         * Se ejecuta en el hilo: EN SEGUNDO PLANO
+         *
+         * param array con los valores pasados en "execute"
+         * @return devuelve un valor al terminar de ejecutar este segundo plano. Se lo envía y ejecuta "onPostExecute" si ha termiado, o a "onCancelled" si se ha cancelado con "cancel"
+         */
         @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(String... variableNoUsada) {
@@ -273,13 +273,13 @@ public class HacerReserva extends AppCompatActivity {
                 boolean algo =  st1.execute(query1);
 
                 // iterate through the java resultset
-               // while (rs.next()) {
+                // while (rs.next()) {
 
-                 //   String firstName = rs.getString("cDni");
+                //   String firstName = rs.getString("cDni");
 
 
-                    // print the results
-                   // System.out.format("%s \n", firstName);
+                // print the results
+                // System.out.format("%s \n", firstName);
                 //}
                 st1.close();
 
@@ -294,50 +294,50 @@ public class HacerReserva extends AppCompatActivity {
             return res;
         }
 
-            /**
-             * Se ejecuta después de que en "doInBackground" ejecute el método "publishProgress".
-             *
-             * Se ejecuta en el hilo: PRINCIPAL
-             *
-             * param array con los valores pasados en "publishProgress"
-             */
-            //@Override
-            protected void onProgressUpdate(Float... porcentajeProgreso) {
-                TV_mensaje.setText("Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
-                Log.v(TAG_LOG, "Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
+        /**
+         * Se ejecuta después de que en "doInBackground" ejecute el método "publishProgress".
+         *
+         * Se ejecuta en el hilo: PRINCIPAL
+         *
+         * param array con los valores pasados en "publishProgress"
+         */
+        //@Override
+        protected void onProgressUpdate(Float... porcentajeProgreso) {
+            TV_mensaje.setText("Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
+            Log.v(TAG_LOG, "Progreso descarga: "+porcentajeProgreso[0]+"%. Hilo PRINCIPAL");
 
-                miBarraDeProgreso.setProgress( Math.round(porcentajeProgreso[0]) );
-            }
+            miBarraDeProgreso.setProgress( Math.round(porcentajeProgreso[0]) );
+        }
 
-            /**
-             * Se ejecuta después de terminar "doInBackground".
-             *
-             * Se ejecuta en el hilo: PRINCIPAL
-             *
-             * param array con los valores pasados por el return de "doInBackground".
-             */
-            // @Override
-            protected void onPostExecute(List<Reserva> cantidadProcesados) {
-
-            }
-
-            /**
-             * Se ejecuta si se ha llamado al método "cancel" y después de terminar "doInBackground". Por lo que se ejecuta en vez de "onPostExecute"
-             * Nota: Este onCancelled solo funciona a partir de Android 3.0 (Api Level 11 en adelante). En versiones anteriores onCancelled no funciona
-             *
-             * Se ejecuta en el hilo: PRINCIPAL
-             *
-             * param array con los valores pasados por el return de "doInBackground".
-             */
-            //@Override
-            protected void onCancelled (Integer cantidadProcesados) {
-                TV_mensaje.setText("DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
-                Log.v(TAG_LOG, "DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
-
-                TV_mensaje.setTextColor(Color.RED);
-            }
+        /**
+         * Se ejecuta después de terminar "doInBackground".
+         *
+         * Se ejecuta en el hilo: PRINCIPAL
+         *
+         * param array con los valores pasados por el return de "doInBackground".
+         */
+        // @Override
+        protected void onPostExecute(List<Reserva> cantidadProcesados) {
 
         }
+
+        /**
+         * Se ejecuta si se ha llamado al método "cancel" y después de terminar "doInBackground". Por lo que se ejecuta en vez de "onPostExecute"
+         * Nota: Este onCancelled solo funciona a partir de Android 3.0 (Api Level 11 en adelante). En versiones anteriores onCancelled no funciona
+         *
+         * Se ejecuta en el hilo: PRINCIPAL
+         *
+         * param array con los valores pasados por el return de "doInBackground".
+         */
+        //@Override
+        protected void onCancelled (Integer cantidadProcesados) {
+            TV_mensaje.setText("DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
+            Log.v(TAG_LOG, "DESPUÉS de CANCELAR la descarga. Se han descarcado "+cantidadProcesados+" imágenes. Hilo PRINCIPAL");
+
+            TV_mensaje.setTextColor(Color.RED);
+        }
+
+    }
 
 
     public void hacerReserva(View view)throws SQLException {
@@ -345,4 +345,4 @@ public class HacerReserva extends AppCompatActivity {
         toast1.show();
         new ConnectMySql().execute();
 
-    }  }
+    }  }    }  }

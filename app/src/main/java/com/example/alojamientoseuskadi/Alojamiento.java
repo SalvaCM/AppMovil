@@ -3,6 +3,7 @@ package com.example.alojamientoseuskadi;
 public class Alojamiento {
     private int codAlojamiento;
     private String nombre;
+    private String direccion;
     private String telefono;
     private String tipo;
     private String web;
@@ -42,6 +43,21 @@ public class Alojamiento {
         this.localidad = localidad;
         this.localizacion = localizacion;
     }
+    public Alojamiento(int codAlojamiento, String nombre,String direccion, String telefono, String tipo, String web, int capacidad, String descripcion, String email, String latitud, String longitud, String localidad, String localizacion) {
+        this.codAlojamiento = codAlojamiento;
+        this.nombre = nombre;
+        this.direccion=direccion;
+        this.telefono = telefono;
+        this.tipo = tipo;
+        this.web = web;
+        this.capacidad = capacidad;
+        this.descripcion = descripcion;
+        this.email = email;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.localidad = localidad;
+        this.localizacion = localizacion;
+    }
 
     public int getCodAlojamiento() {
         return codAlojamiento;
@@ -53,6 +69,14 @@ public class Alojamiento {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public void setNombre(String nombre) {

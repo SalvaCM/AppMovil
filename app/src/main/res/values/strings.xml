@@ -69,4 +69,25 @@
     <string name="msjErrorUsu">"El usuario introducido ya existe. "</string>
     <string name="msjErrorContr">"Las contraseñas deben ser iguales "</string>
 
+    <!-- Strings related to verreserva -->
+    <string name="tituloVerReserv">"Detalles de su reserva"</string>
+    <string name="tituloVerReserv2">"Detalles de la reserva"</string>
+    <string name="tituloVerReserv3">"Detalles del usuario"</string>
+    <string name="tituloVerReserv4">"Detalles del alojamiento"</string>
+    <string name="titulocodigo">"Código de la reserva:"</string>
+    <string name="fechaRealiz">"Fecha:"</string>
+    <string name="del">"Del:"</string>
+    <string name="al">"al:"</string>
+    <string name="dniUsu">"DNI:"</string>
+    <string name="nombreusu">"Nombre:"</string>
+    <string name="apellidosusu">"Apellidos:"</string>
+    <string name="telfusu">"Teléfono:"</string>
+    <string name="borrar">"Borrar"</string>
+
+    <string name="atencion">"Atención"</string>
+    <string name="preguntaBorrar">"Si pulsa borrar su reserva se borrará permanentemente"</string>
+    <string name="aceptar">"Borrar"</string>
+
+    <string name="msjEliminado">"Su reserva se eliminó correctamente"</string>
+
 </resources>
