@@ -63,8 +63,6 @@ public class VerAlojamientos extends AppCompatActivity {
 
                 //Se cargan los datos de los alojamientos Filtrados por tipo:
                 GetArrayItemsFiltrado(tipoAlojSelecc);
-
-
             }
 
             @Override

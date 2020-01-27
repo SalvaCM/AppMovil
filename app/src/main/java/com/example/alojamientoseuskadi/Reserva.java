@@ -71,11 +71,10 @@ public class Reserva {
     @Override
     public String toString() {
         return
-                "codReserva:" + codReserva  +"\n" +
-                "codAlojamiento:" + codAlojamiento  +"\n" +
-                "codUsuario:" + codUsuario +"\n" +
-                "Realizada el: " + fechaRealizada +"\n" +
-                "Fecha reserva:" + fechaEntrada + " - " + fechaSalida +
-                '}';
+                "Código de la reserva: " + codReserva  +"\n" +
+                "Código de alojamiento: " + codAlojamiento  +"\n" +
+                "Código del usuario: " + codUsuario +"\n" +
+                "Realizada el: " + fechaRealizada.substring(0,10) +"\n" +
+                "Fecha reserva: " + fechaEntrada.substring(0,10) + " - " + fechaSalida.substring(0,10);
     }
 }

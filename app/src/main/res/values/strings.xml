@@ -84,4 +84,10 @@
     <string name="telfusu">"Teléfono:"</string>
     <string name="borrar">"Borrar"</string>
 
+    <string name="atencion">"Atención"</string>
+    <string name="preguntaBorrar">"Si pulsa borrar su reserva se borrará permanentemente"</string>
+    <string name="aceptar">"Borrar"</string>
+
+    <string name="msjEliminado">"Su reserva se eliminó correctamente"</string>
+
 </resources>

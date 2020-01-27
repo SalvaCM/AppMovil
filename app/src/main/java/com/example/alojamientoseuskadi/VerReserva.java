@@ -1,8 +1,10 @@
 package com.example.alojamientoseuskadi;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -118,10 +120,44 @@ public class VerReserva extends AppCompatActivity {
         startActivity(i);
     }
     public void borrarReserva(View view){
+        mostrarAlertDialogBorrar();
+    }
+
+    //AlertDialog
+    public void mostrarAlertDialogBorrar(){
+
+        //AlertDialog-----------------------
+        AlertDialog.Builder dialogo1 = new AlertDialog.Builder(this);
+        dialogo1.setTitle(R.string.atencion);
+        dialogo1.setMessage(R.string.preguntaBorrar);
+        dialogo1.setCancelable(false);
+        dialogo1.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                aceptarBorrar();
+            }
+        });
+        dialogo1.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogo1, int id) {
+                cancelarBorrar();
+            }
+        });
+        dialogo1.show();
+        //FIN AlertDialog------------------
+
+    }
+
+    public void   aceptarBorrar(){
         new ConnectMySqlBBDDDelete().execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
+
+        Toast toast1 = Toast.makeText(getApplicationContext(), R.string.msjEliminado, Toast.LENGTH_SHORT);
+        toast1.show();
 
         Intent i = new Intent(this, VerReservas.class);
         startActivity(i);
+    }
+
+    public void cancelarBorrar(){
+
     }
 
     private class ConnectMySqlBBDDDelete extends AsyncTask<String, Void, List<Reserva>> {
