@@ -2,6 +2,7 @@ package com.example.alojamientoseuskadi;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,12 @@ public class VerReserva extends AppCompatActivity {
     EditText etFechaSalida;
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
+
+
+    TextView nombreUsu;
+    TextView apellidoUsu;
+    TextView telfUsu;
+    TextView emailUsu;
 
     TextView nombreAloj;
     TextView descripAloj;
@@ -45,6 +52,11 @@ public class VerReserva extends AppCompatActivity {
         String fechaEntradaReservaSelec = settings.getString("fechaEntradaReservaSelec", "");
         String fechaSalidaReservaSelec = settings.getString("fechaSalidaReservaSelec", "");
 
+        String dniUsuarioLog = settings.getString("dniUsuarioLog", "");
+        String nombreUsuario = settings.getString("nombreUsuario", "");
+        String apellidosUsuario = settings.getString("apellidosUsuario", "");
+        String telfUsuario = settings.getString("telfUsuario", "");
+
         String nombreAlojReservaSelec = settings.getString("nombreAlojReservaSelec", "");
         String descripAlojReservaSelec = settings.getString("descripAlojReservaSelec", "");
         String localidadAlojReservaSelec = settings.getString("localidadAlojReservaSelec", "");
@@ -65,6 +77,15 @@ public class VerReserva extends AppCompatActivity {
         tvFechaSalida = findViewById(R.id.tvFechaSalida);
         tvFechaSalida.setText(fechaSalidaReservaSelec);
 
+        nombreUsu = findViewById(R.id.tvDniUsu);
+        nombreUsu.setText(dniUsuarioLog);
+        apellidoUsu= findViewById(R.id.tvNombreUsu);
+        apellidoUsu.setText(nombreUsuario);
+        telfUsu= findViewById(R.id.tvApellidosUsu);
+        telfUsu.setText(apellidosUsuario);
+        emailUsu= findViewById(R.id.tvTelfUsu);
+        emailUsu.setText(telfUsuario);
+
         nombreAloj = findViewById(R.id.tvNombre);
         nombreAloj.setText(nombreAlojReservaSelec);
         descripAloj = findViewById(R.id.tvDescripcion);
@@ -83,6 +104,10 @@ public class VerReserva extends AppCompatActivity {
         toast1.show();
     }
 
+    public void atras(View view){
+        Intent i = new Intent(this, VerReservas.class);
+        startActivity(i);
+    }
     public void borrarReserva(View view){
 
     }

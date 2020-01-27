@@ -128,7 +128,7 @@
         app:layout_constraintVertical_bias="0.931" />
 
     <Button
-        android:id="@+id/btnReservar"
+        android:id="@+id/btnBorrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -155,7 +155,7 @@
         app:layout_constraintVertical_bias="0.139" />
 
     <TextView
-        android:id="@+id/tvlocalidad"
+        android:id="@+id/tvNombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"

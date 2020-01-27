@@ -28,6 +28,7 @@ import java.util.List;
 
 public class VerReservas extends AppCompatActivity {
     public List<Reserva> listaReservas = new ArrayList<Reserva>();
+    public List<Usuario> listaUsuarios = new ArrayList<Usuario>();
     public List<Alojamiento> listaAlojamientos = new ArrayList<Alojamiento>();
     private final boolean CANCELAR_SI_MAS_DE_100_IMAGENES = false;//se encargará de decir si cancelamos o no la descarga al pasa de 100 imágenes.
     private final String TAG_LOG = "test";//El tag del log para que veamos por consola lo que va haciendo nuestra aplicación.
@@ -168,7 +169,7 @@ public class VerReservas extends AppCompatActivity {
                     fechaSalida = rs.getString("cFechaSalida");
 
                     Usuario usuarioLogeado = new Usuario(codUsuario, nombreUsuario, apellidosUsuario, telfUsuario);
-
+                    listaUsuarios.add(usuarioLogeado);
                     Alojamiento alojamiento = new Alojamiento(codAlojamiento, nombreAloj, direccionAloj, telfAloj, tipoAloj, webAloj, capacidadAloj, descripcionAloj, emailAloj, latitudAloj, longitudAloj, localidadAloj, localizacionAloj);
                     listaAlojamientos.add(alojamiento);
 
@@ -243,6 +244,11 @@ public class VerReservas extends AppCompatActivity {
         editor.putString("fechaRealizadaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaRealizada()));
         editor.putString("fechaEntradaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaEntrada()));
         editor.putString("fechaSalidaReservaSelec", String.valueOf(listaReservas.get(posicionReservaSelecc).getFechaSalida()));
+
+        editor.putString("dniUsuarioLog", String.valueOf(listaUsuarios.get(posicionReservaSelecc).getDni()));
+        editor.putString("nombreUsuario", String.valueOf(listaUsuarios.get(posicionReservaSelecc).getNombre()));
+        editor.putString("apellidosUsuario", String.valueOf(listaUsuarios.get(posicionReservaSelecc).getApellidos()));
+        editor.putString("telfUsuario", String.valueOf(listaUsuarios.get(posicionReservaSelecc).getTelefono()));
 
         editor.putString("nombreAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getNombre()));
         editor.putString("descripAlojReservaSelec", String.valueOf(listaAlojamientos.get(posicionReservaSelecc).getDescripcion()));
