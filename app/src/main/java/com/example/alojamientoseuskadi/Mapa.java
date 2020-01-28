@@ -108,7 +108,9 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         mapa = googleMap;
         mapa.setMapType(GoogleMap.MAP_TYPE_NORMAL);
         //mapa.getUiSettings().setZoomControlsEnabled(false);
-        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 15));//desplaza el área de visualización a una determinada posición (UPV), a la vez que define el nivel de zum (15)
+
+        //Botón 5km
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 5));//desplaza el área de visualización a una determinada posición (UPV), a la vez que define el nivel de zum (15)
 
         //Para añadir  marcador posición actual:
 
@@ -137,6 +139,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                         //.icon(BitmapDescriptorFactory.fromResource(R.drawable.place))
                        .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
                         .anchor(0.5f, 0.5f));
+                //Botón 10km
                 mapa.animateCamera(CameraUpdateFactory.newLatLng(posicion));
                 mapa.setOnMapClickListener(this);
             }
@@ -161,6 +164,16 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 10));//desplaza el área de visualización a una determinada posición (posEnKM), a la vez que define el nivel de zum (15)
 
     }
+    public void cincokm(View view) {
+        //Botón 5km
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 15));
+
+    }
+    public void quincekm(View view) {
+        //Botón 5km
+        mapa.moveCamera(CameraUpdateFactory.newLatLngZoom(UPV, 12));
+    }
+    //Marcar posición:
     public void addMarker(View view) {
         mapa.addMarker(new MarkerOptions().position(
                 mapa.getCameraPosition().target));
@@ -175,8 +188,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                 //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
               //  i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getId());
               startActivity(i);
-
     }
+    //FIN Marcar posición:
 
     //FIN*************************MAPAS**********************************************
 
