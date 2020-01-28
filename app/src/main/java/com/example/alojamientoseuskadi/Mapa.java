@@ -182,12 +182,6 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
         mapa.addMarker(new MarkerOptions().position(puntoPulsado)
                 .icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)));
-        //Cuando selecciona algún alojamiento:
-
-                Intent i = new Intent(Mapa.this, HacerReserva.class);
-                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
-              //  i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getId());
-              startActivity(i);
     }
     //FIN Marcar posición:
 
