@@ -132,13 +132,14 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                 LatLng posicion = new LatLng(latitud, longitud);
 
                 mapa.addMarker(new MarkerOptions() //permite añadir  marcadores
-
                         .position(posicion)
                         .title(a.getNombre().toString())
-                        // .snippet("222222")
-                        //.icon(BitmapDescriptorFactory.fromResource(R.drawable.place))
-                       .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
+                        .snippet("Contacto: " + a.getTelefono().toString())
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.aloj))
+                      // .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
                         .anchor(0.5f, 0.5f));
+
+
                 //Botón 10km
                 mapa.animateCamera(CameraUpdateFactory.newLatLng(posicion));
                 mapa.setOnMapClickListener(this);
