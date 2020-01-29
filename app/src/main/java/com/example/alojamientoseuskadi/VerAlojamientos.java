@@ -102,7 +102,7 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
                 Intent i = new Intent(VerAlojamientos.this, HacerReserva.class);
                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
-                i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getId());
+                i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getcodAlojamiento());
                 i.putExtra("nombreAlojSeleccionado", GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTitulo());
                 i.putExtra("descripcionAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getDesc());
                 i.putExtra("localidadAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getLocalidad());

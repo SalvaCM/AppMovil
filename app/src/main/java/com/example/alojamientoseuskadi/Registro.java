@@ -41,7 +41,9 @@ public class Registro extends AppCompatActivity {
         telefono=(EditText)findViewById(R.id.telefono);
         email=(EditText)findViewById(R.id.email);
     }
-// ************************************* INICIO BOTON REGISTRARSE **********************************
+
+    // ************************************* INICIO BOTON REGISTRARSE **********************************
+
     public void btnRegistrarse(View view){
         String regex = "^[\\w!#$%&’*+/=?`{|}~^-]+(?:\\.[\\w!#$%&’*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
         Pattern pattern = Pattern.compile(regex);
@@ -57,11 +59,7 @@ public class Registro extends AppCompatActivity {
             notificacion.show();
 
         }
-        //validador del email
-        else if(matcher.matches() == false){
-            notificacion = Toast.makeText(this, "El formato del correo es incorrecto", Toast.LENGTH_LONG);
-            notificacion.show();
-        }
+
         //numero 9 digitos
         else if(telefono.length()< 9 ){
             notificacion = Toast.makeText(this, "El numero tiene que tener 9 digitos", Toast.LENGTH_LONG);
@@ -206,4 +204,6 @@ public class Registro extends AppCompatActivity {
     // ************************************ FIN FORMATO DNI *************************************
 
 
+
 }
+
