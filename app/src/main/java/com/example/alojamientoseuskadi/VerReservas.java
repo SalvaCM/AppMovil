@@ -42,6 +42,8 @@ public class VerReservas extends AppCompatActivity {
     private int posicionReservaSelecc;
 
     //variables:
+    //Dato que viene de SharedPreferences:
+    String usuarioLogeado;
     //Datos usuario:
     String nombreUsuario;
     String apellidosUsuario;
@@ -118,6 +120,8 @@ public class VerReservas extends AppCompatActivity {
         @SuppressLint("WrongThread")
         @Override
         protected List<Reserva> doInBackground(String... variableNoUsada) {
+            SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+            String nombre = settings.getString("usuarioLogeado", "");
 
             try {
                 Class.forName("com.mysql.jdbc.Driver");
@@ -129,7 +133,7 @@ public class VerReservas extends AppCompatActivity {
                 //String query = "SELECT * FROM tReservas";
 
                 //FALTA: and R.cCodUsuario='" & usuarioLogeado.ToString & "'"
-                String query = "select R.cReserva, R.cFechaEntrada, R.cFechaSalida, R.cFechaRealizada, R.cCodUsuario,U.cNombre 'NombreUsuario' ,U.cApellidos, U.cTelefono 'telfUsuario', R.cCodAlojamiento,A.cNombre 'NombreAlojamiento', A.cDireccion, A.cLocalizacion, A.cEmail, A.cTelefono 'telfAloj', A.cWeb, A.cTipo, A.cCapacidad, A.cDescripcion, A.cLatitud, A.cLongitud, A.cLocalidad    from tReservas R, tAlojamientos A, tUsuarios U where R.cCodAlojamiento=A.cCodAlojamiento and R.cCodUsuario=U.cDni";
+                String query = "select R.cReserva, R.cFechaEntrada, R.cFechaSalida, R.cFechaRealizada, R.cCodUsuario,U.cNombre 'NombreUsuario' ,U.cApellidos, U.cTelefono 'telfUsuario', R.cCodAlojamiento,A.cNombre 'NombreAlojamiento', A.cDireccion, A.cLocalizacion, A.cEmail, A.cTelefono 'telfAloj', A.cWeb, A.cTipo, A.cCapacidad, A.cDescripcion, A.cLatitud, A.cLongitud, A.cLocalidad    from tReservas R, tAlojamientos A, tUsuarios U where R.cCodAlojamiento=A.cCodAlojamiento and R.cCodUsuario=U.cDni and R.cCodUsuario='" + nombre + "'";
                 // create the java statement
                 Statement st = con.createStatement();
 

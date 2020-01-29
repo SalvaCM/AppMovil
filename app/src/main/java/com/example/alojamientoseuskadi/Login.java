@@ -21,6 +21,7 @@ import java.sql.Statement;
 
 public class Login extends AppCompatActivity {
 
+    public static String usuarioLogeado;
     private EditText usuario;
     private EditText contrasena;
     private String logeado = "";
@@ -61,6 +62,7 @@ public class Login extends AppCompatActivity {
            SharedPreferences.Editor editor = settings.edit();
            editor.putString("usuarioLogeado", usuario.getText().toString());
            editor.commit();
+
            Intent i = new Intent(this, MainActivity.class);
            startActivity(i);
     //si el proceso devuelve un "no"
