@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -14,19 +13,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -36,34 +33,27 @@ public class HacerReserva extends AppCompatActivity {
     private TextView TV_mensaje; //Y el TextView que será el que muestre el mensaje que cambia de color.
     //pruebas
     // Declaración de elementos de la actividad.xml
-    EditText txtPruebas;
     EditText etFechaEntrada;
     EditText etFechaSalida;
     Calendar calendarioEntrada = Calendar.getInstance();
     Calendar calendarioSalida = Calendar.getInstance();
-    EditText calendar3;
-    Calendar calendar1;
-    Calendar calendar2;
+
     TextView telefonoAloj;
     TextView nombreAloj;
     TextView descripAloj;
     TextView localidadAloj;
-    TextView IDAloj;
     TextView emailAloj;
     TextView webAloj;
-    TextView usuarioLog;
     Integer idAlojSeleccionado=78;
-    private String nombAlojSeleccionado;
+
 
     //Declaración de variables
-    String tumadre = "dd/MM/yyyy";
-    String tupadre = "dd/MM/yyyy"; //In which you need put here
+    String Entrada = "dd/MM/yyyy";
+    String Salida = "dd/MM/yyyy"; //In which you need put here
     String formatoDeFecha = "yyyy-MM-dd"; //In which you need put here
     SimpleDateFormat sdf = new SimpleDateFormat(formatoDeFecha, Locale.US);
-    Toast toastFecha;
     Calendar calendar = Calendar.getInstance();
     SimpleDateFormat fechaActual = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat horaActual = new SimpleDateFormat("HH:mm:ss ");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +73,8 @@ public class HacerReserva extends AppCompatActivity {
         toast1.show();
 
         //Se saca el usuario que se ha logueado que está guardado en la clase SharedPreferences
-        SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
-        String nombre = settings.getString("usuarioLogeado", "");
-        usuarioLog = findViewById(R.id.tvUsuarioLog);
-        usuarioLog.setText(nombre);
+
+
 
         //Se rellenan los datos del activity con los datos que hemos pasado:
         nombreAloj = findViewById(R.id.tvNombre);
@@ -159,23 +147,68 @@ public class HacerReserva extends AppCompatActivity {
 
     //Fecha entrada
     private void actualizarInput() {
-        etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        tumadre = simpleDateFormat.format(calendarioSalida.getTime());
+
+        String strFechaActual = fechaActual.format(calendar.getTime());
+
+
+         Date hola1 =calendarioEntrada.getTime();
+         Date hola =calendar.getTime();
+        int dias=(int) ((hola1.getTime()-hola.getTime())/86400000);
+
+        if(dias < 0){
+
+                Toast toast1 = Toast.makeText(getApplicationContext(), "la fecha de Entrada debe ser mayor a la  a de hoy", Toast.LENGTH_SHORT);
+                toast1.show();
+
+                Entrada = null;
+
+        } else {
+            etFechaSalida.setEnabled(true);
+            etFechaSalida.setClickable(true);
+            etFechaSalida.setText(null);
+
+            etFechaEntrada.setText(sdf.format(calendarioEntrada.getTime()));
+            Entrada = fechaActual.format(calendarioEntrada.getTime());
+
+        }
     }
 
     //Fecha Salida
     private void actualizarInput2() {
 
 
-        etFechaSalida.setText(sdf.format(calendarioSalida.getTime()));
+
         String pattern = "yyyy-MM-dd";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
-        tupadre = simpleDateFormat.format(calendarioSalida.getTime());
 
+        etFechaSalida = findViewById(R.id.fechaSalida);
+
+
+
+        String strFechaActual = fechaActual.format(calendar.getTime());
+
+
+        Date hola1 =calendarioSalida.getTime();
+        Date hola =calendarioEntrada.getTime();
+        int dias=(int) ((hola1.getTime()-hola.getTime())/86400000);
+
+        if(dias < 0){
+
+            Toast toast1 = Toast.makeText(getApplicationContext(), "la fecha de salida debe ser igual o mayor a la de entrada", Toast.LENGTH_SHORT);
+            toast1.show();
+
+            Salida = null;
+
+        } else {
+
+            etFechaSalida.setText(sdf.format(calendarioSalida.getTime()));
+            Salida = fechaActual.format(calendarioSalida.getTime());
+
+        }
 
     }
 
@@ -220,6 +253,8 @@ public class HacerReserva extends AppCompatActivity {
         @SuppressLint("WrongThread")
         @Override
         protected String doInBackground(String... variableNoUsada) {
+            SharedPreferences settings = getSharedPreferences("perfil", MODE_PRIVATE);
+            String nombre = settings.getString("usuarioLogeado", "");
 
             ResultSet rs;
             Statement st = null;
@@ -265,7 +300,7 @@ public class HacerReserva extends AppCompatActivity {
                 st.close();
                 rs.close();
 
-                String query1 = "INSERT INTO `tReservas`(`cReserva`,`cCodAlojamiento`, `cCodUsuario`, `cFechaEntrada`, `cFechaRealizada`, `cFechaSalida`) VALUES (" + reservas + "," + idAlojSeleccionado + ",'"  +"22222222W" +"','" + strFechaActual + "','" + tupadre + "','" + tumadre + "')";
+                String query1 = "INSERT INTO `tReservas`(`cReserva`,`cCodAlojamiento`, `cCodUsuario`, `cFechaEntrada`, `cFechaRealizada`, `cFechaSalida`) VALUES (" + reservas + "," + idAlojSeleccionado + ",'"  +nombre +"','" +Entrada  + "','" +strFechaActual  + "','" + Salida + "')";
                 // create the java statement
                 st1 = con.createStatement();
 
@@ -285,6 +320,7 @@ public class HacerReserva extends AppCompatActivity {
 
 
             } catch (ClassNotFoundException e) {
+
                 e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -345,4 +381,4 @@ public class HacerReserva extends AppCompatActivity {
         toast1.show();
         new ConnectMySql().execute();
 
-    }  }    }  }
+    }  }

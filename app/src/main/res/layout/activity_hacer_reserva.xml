@@ -104,14 +104,18 @@
         android:id="@+id/fechaSalida"
         android:layout_width="134dp"
         android:layout_height="55dp"
+        android:clickable="false"
+        android:enabled="false"
         android:focusable="false"
         android:inputType="date"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.88"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.758" />
+        app:layout_constraintVertical_bias="0.758"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/btnAtras"
@@ -168,20 +172,6 @@
 
 
     <TextView
-        android:id="@+id/tvcodReservaLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="map"
-        android:text="TextView"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
-    <TextView
         android:id="@+id/tvDescripcion"
         android:layout_width="240dp"
         android:layout_height="77dp"
@@ -206,7 +196,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.369"
-        app:srcCompat="@drawable/ic_placeholder" />
+        app:srcCompat="@drawable/ic_placeholder"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -218,7 +209,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.423"
-        app:srcCompat="@drawable/ic_call" />
+        app:srcCompat="@drawable/ic_call"
+        tools:ignore="VectorDrawableCompat" />
 
     <ImageView
         android:id="@+id/imageView3"
@@ -242,21 +234,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.549"
-        app:srcCompat="@drawable/ic_internet" />
+        app:srcCompat="@drawable/ic_internet"
+        tools:ignore="VectorDrawableCompat" />
 
-    <TextView
-        android:id="@+id/tvcodReservaLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="124dp" />
-
-    <TextView
-        android:id="@+id/IDAloj"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="122dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,11 +59,7 @@ public class Registro extends AppCompatActivity {
             notificacion.show();
 
         }
-        //validador del email
-        else if(matcher.matches() == false){
-            notificacion = Toast.makeText(this, "El formato del correo es incorrecto", Toast.LENGTH_LONG);
-            notificacion.show();
-        }
+
         //numero 9 digitos
         else if(telefono.length()< 9 ){
             notificacion = Toast.makeText(this, "El numero tiene que tener 9 digitos", Toast.LENGTH_LONG);
