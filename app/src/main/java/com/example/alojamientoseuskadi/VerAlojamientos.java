@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class VerAlojamientos extends AppCompatActivity {
@@ -29,6 +30,8 @@ public class VerAlojamientos extends AppCompatActivity {
     public String nombreAlojSelecc;
 
     public String tipoAlojSelecc;
+    public String ascDescSelecc ="Ascendente";
+
     //lista (ListView) personalizado:
     private ListView lvItems;
     private Adaptador adaptador;
@@ -50,6 +53,30 @@ public class VerAlojamientos extends AppCompatActivity {
         String[] letra = {"Todos","Albergue","Rural","Camping"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
+        //Spiner para AscDesc:
+        Spinner spinnerAscDesc = (Spinner) findViewById(R.id.spinnerAscDesc);
+        String[] opciones = {"Ascendente","Descendente"};
+        spinnerAscDesc.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opciones));
+
+
+        //Cuando se selecciona AscDesc:
+        spinnerAscDesc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                ascDescSelecc = (String) adapterView.getItemAtPosition(pos).toString();
+                Toast.makeText(adapterView.getContext(),
+                        (String) "Seleccionado: " + ascDescSelecc, Toast.LENGTH_SHORT).show();
+
+                //Se cargan los datos de los alojamientos Filtrados por tipo:
+                //GetArrayItemsFiltrado(tipoAlojSelecc);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
         //Cuando se selecciona un tipo de alojamiento:
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -96,6 +123,11 @@ public class VerAlojamientos extends AppCompatActivity {
                 listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
             }
         }
+
+        if(ascDescSelecc.toString()!="Ascendente"){
+            Collections.reverse(listItems);
+       }
+
         adaptador = new Adaptador(listItems,this);
         lvItems.setAdapter(adaptador);
         return listItems;
