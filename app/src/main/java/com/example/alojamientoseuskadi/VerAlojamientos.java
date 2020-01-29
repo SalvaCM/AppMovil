@@ -70,7 +70,7 @@ public class VerAlojamientos extends AppCompatActivity {
                         (String) "Seleccionado: " + ascDescSelecc, Toast.LENGTH_SHORT).show();
 
                 //Se cargan los datos de los alojamientos Filtrados por tipo:
-                //GetArrayItemsFiltrado(tipoAlojSelecc);
+                GetArrayItemsFiltrado(tipoAlojSelecc);
             }
 
             @Override

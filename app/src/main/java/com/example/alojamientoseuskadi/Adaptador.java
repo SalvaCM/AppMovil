@@ -52,7 +52,7 @@ public class Adaptador extends BaseAdapter {
 
         //rellenan el contenido de la vista con el contenido del obtjeto
         imgFoto.setImageResource(Item.getImgFoto());
-        tvID.setText("5");
+        //tvID.setText("5");
         tvTitulo.setText(Item.getTitulo());
         tvContenido.setText(Item.getContenido());
         tvTelefono.setText(Item.getTelefono());
