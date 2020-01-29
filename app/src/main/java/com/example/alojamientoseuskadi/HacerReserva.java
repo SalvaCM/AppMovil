@@ -76,7 +76,7 @@ public class HacerReserva extends AppCompatActivity {
 
         //Se rellenan los datos del activity con los datos que hemos pasado:
         nombreAloj = findViewById(R.id.tvNombre);
-        nombreAloj.setText(nombreAlojamiento + idAlojSeleccionado);
+        nombreAloj.setText(nombreAlojamiento);
         descripAloj = findViewById(R.id.tvDescripcion);
         descripAloj.setText(descripcionAlojSeleccionado);
         localidadAloj =findViewById(R.id.tvlocalidad);

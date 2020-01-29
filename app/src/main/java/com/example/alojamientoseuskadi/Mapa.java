@@ -22,6 +22,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
@@ -45,6 +46,8 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
     private ListView lvItems;
     private Adaptador adaptador;
     private ArrayList<Entidad> arrayEntidad;
+
+    private Marker marker;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -139,12 +142,12 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                       // .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
                         .anchor(0.5f, 0.5f));
 
+                irAHacerReserva();
 
                 //Botón 10km
                 mapa.animateCamera(CameraUpdateFactory.newLatLng(posicion));
                 mapa.setOnMapClickListener(this);
             }
-
         }
         //FIN Añadir  marcadores de los alojamientos:
 
@@ -156,6 +159,25 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
             mapa.getUiSettings().setCompassEnabled(true);
         }
     }
+
+    //Que cuando se haga click vaya a HacerReserva
+    public boolean setOnMapClickListener(Marker marker){
+        if(marker.equals(mapa)){
+            Toast toast1 =Toast.makeText(getApplicationContext(),"Toast por defecto1", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+        else{
+            Toast toast1 =Toast.makeText(getApplicationContext(),"Toast por defecto 2", Toast.LENGTH_SHORT);
+            toast1.show();
+        }
+        return false;
+    }
+
+    public void irAHacerReserva(){
+
+    }
+    //Fin
+
     public void moveCamera(View view) {
         mapa.moveCamera(CameraUpdateFactory.newLatLng(UPV));
     }

@@ -153,6 +153,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.139" />
+
+
     <TextView
         android:id="@+id/tvlocalidad"
         android:layout_width="wrap_content"
@@ -161,25 +163,10 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.313"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.615" />
-
-
-    <TextView
-        android:id="@+id/tvcodReservaLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:autoLink="map"
-        android:text="TextView"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.167"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
+        app:layout_constraintVertical_bias="0.366" />
 
     <TextView
         android:id="@+id/tvDescripcion"
@@ -244,11 +231,4 @@
         app:layout_constraintVertical_bias="0.549"
         app:srcCompat="@drawable/ic_internet" />
 
-    <TextView
-        android:id="@+id/tvcodReservaLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        tools:layout_editor_absoluteX="54dp"
-        tools:layout_editor_absoluteY="124dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
