@@ -44,11 +44,11 @@
 
     
 
-    
+    <!-- Strings related to Mapa -->
     <string name="miPosicion">"Go to my position"</string>
+    <string name="miQuinceKm">"See 15 Km"</string>
     <string name="miDiezKm">"See 10 Km"</string>
-    <string name="marcador">"Marker"</string>
-
+    <string name="marcador">"See 5 Km</string>
     
     <string name="tituloRegistro">"Enter your information"</string>
     <string name="tituloDatosUsu">"User Data:"</string>

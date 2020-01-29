@@ -50,7 +50,6 @@ public class VerAlojamientos extends AppCompatActivity {
         String[] letra = {"Todos","Albergue","Rural","Camping"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
-
         //Cuando se selecciona un tipo de alojamiento:
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -70,8 +69,6 @@ public class VerAlojamientos extends AppCompatActivity {
             {    }
         });
 
-
-
         //Cuando selecciona algún alojamiento:
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -89,8 +86,6 @@ public class VerAlojamientos extends AppCompatActivity {
             }
         });
     }
-
-    
 
     private ArrayList<Entidad> GetArrayItemsFiltrado(String opcion){
         ArrayList<Entidad> listItems = new ArrayList<>();

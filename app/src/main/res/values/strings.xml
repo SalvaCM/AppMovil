@@ -45,9 +45,10 @@
     <!-- Strings related to VerAlojamientos -->
 
     <!-- Strings related to Mapa -->
-    <string name="miPosicion">"Ir a mi posición"</string>
+    <string name="miPosicion">"Mi posición"</string>
+    <string name="miQuinceKm">"Ver 15Km"</string>
     <string name="miDiezKm">"Ver 10 Km"</string>
-    <string name="marcador">"Marcador"</string>
+    <string name="marcador">"Ver 5Km"</string>
 
     <!-- Strings related to Registro -->
     <string name="tituloRegistro">"Introduzca sus datos"</string>
