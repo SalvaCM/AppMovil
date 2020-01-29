@@ -319,6 +319,7 @@ public class HacerReserva extends AppCompatActivity {
                 st1.close();
 
 
+
             } catch (ClassNotFoundException e) {
 
                 e.printStackTrace();
@@ -377,8 +378,10 @@ public class HacerReserva extends AppCompatActivity {
 
 
     public void hacerReserva(View view)throws SQLException {
-        Toast toast1 = Toast.makeText(getApplicationContext(), "hola", Toast.LENGTH_SHORT);
-        toast1.show();
-        new ConnectMySql().execute();
 
+        new ConnectMySql().execute();
+        Toast toast1 = Toast.makeText(getApplicationContext(), "reserva realizada", Toast.LENGTH_SHORT);
+        toast1.show();
+        Intent i = new Intent(this, VerAlojamientos.class);
+        startActivity(i);
     }  }
