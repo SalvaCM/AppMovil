@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="216dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="24dp"
 
         android:hint="@string/prompt_email"
@@ -56,9 +56,10 @@
         android:text="@string/action_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.522"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contraseña"
-        app:layout_constraintVertical_bias="0.227" />
+        app:layout_constraintVertical_bias="0.391" />
 
     <Button
         android:id="@+id/registro"
@@ -72,7 +73,7 @@
         android:text="@string/action_registrarse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/login"
         app:layout_constraintVertical_bias="0.0" />
