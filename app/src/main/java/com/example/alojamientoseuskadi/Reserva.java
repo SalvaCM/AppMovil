@@ -73,7 +73,6 @@ public class Reserva {
         return
                 "Código de la reserva: " + codReserva  +"\n" +
                 "Código de alojamiento: " + codAlojamiento  +"\n" +
-                "Código del usuario: " + codUsuario +"\n" +
                 "Realizada el: " + fechaRealizada.substring(0,10) +"\n" +
                 "Fecha reserva: " + fechaEntrada.substring(0,10) + " - " + fechaSalida.substring(0,10);
     }

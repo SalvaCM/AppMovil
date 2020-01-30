@@ -31,6 +31,7 @@ public class VerAlojamientos extends AppCompatActivity {
 
     public String tipoAlojSelecc;
     public String ascDescSelecc ="Ascendente";
+    public String localidadSelecc="Todas";
 
     //lista (ListView) personalizado:
     private ListView lvItems;
@@ -48,26 +49,30 @@ public class VerAlojamientos extends AppCompatActivity {
         //lista (ListView) personalizado:
         lvItems = (ListView) findViewById(R.id.lvItems);
 
-        //Spiner para tipo de alojamiento:
+        //Spiner para tipo de alojamiento (1):
         Spinner spinner = (Spinner) findViewById(R.id.spinnerTipoAloj);
         String[] letra = {"Todos","Albergue","Rural","Camping"};
         spinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, letra));
 
-        //Spiner para AscDesc:
+        //Spiner para Localidad (2):
+        Spinner spinnerLocalidad = (Spinner) findViewById(R.id.spinnerLocalidad);
+        String[] localidades = {"Todas","Bizkaia", "Gipuzkoa", "Araba/Álava"};
+        spinnerLocalidad.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, localidades));
+
+        //Spiner para AscDesc (3):
         Spinner spinnerAscDesc = (Spinner) findViewById(R.id.spinnerAscDesc);
         String[] opciones = {"Ascendente","Descendente"};
         spinnerAscDesc.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opciones));
 
 
-        //Cuando se selecciona AscDesc:
-        spinnerAscDesc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        //Cuando se selecciona un tipo de alojamiento(1):
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
-                ascDescSelecc = (String) adapterView.getItemAtPosition(pos).toString();
-                Toast.makeText(adapterView.getContext(),
-                        (String) "Seleccionado: " + ascDescSelecc, Toast.LENGTH_SHORT).show();
+                tipoAlojSelecc = (String) adapterView.getItemAtPosition(pos).toString();
 
                 //Se cargan los datos de los alojamientos Filtrados por tipo:
                 GetArrayItemsFiltrado(tipoAlojSelecc);
@@ -77,15 +82,31 @@ public class VerAlojamientos extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent)
             {    }
         });
-        //Cuando se selecciona un tipo de alojamiento:
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+        //Cuando se selecciona Localidad(2):
+        spinnerLocalidad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
-                tipoAlojSelecc = (String) adapterView.getItemAtPosition(pos).toString();
-                Toast.makeText(adapterView.getContext(),
-                        (String) "Seleccionado: " + tipoAlojSelecc, Toast.LENGTH_SHORT).show();
+                localidadSelecc = (String) adapterView.getItemAtPosition(pos).toString();
+
+                //Se cargan los datos de los alojamientos Filtrados por tipo:
+                GetArrayItemsFiltrado(tipoAlojSelecc);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+        //Cuando se selecciona AscDesc(3):
+        spinnerAscDesc.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                ascDescSelecc = (String) adapterView.getItemAtPosition(pos).toString();
 
                 //Se cargan los datos de los alojamientos Filtrados por tipo:
                 GetArrayItemsFiltrado(tipoAlojSelecc);
@@ -114,17 +135,28 @@ public class VerAlojamientos extends AppCompatActivity {
         });
     }
 
+    //GetArrayItemsFiltrado: se aplican los filtros de búsqueda, se hace así porque los datos proceden de un JSON
     private ArrayList<Entidad> GetArrayItemsFiltrado(String opcion){
         ArrayList<Entidad> listItems = new ArrayList<>();
         for (Alojamiento a : listaAlojamientos) {
-            if(a.getTipo().equals(opcion)){
-                listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
-            }else if(opcion.equals("Todos")){
-                listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+            if(a.getTipo().equals(opcion)){ //(1.1) FILTRO POR TIPO
+                if( a.getLocalidad().equals(localidadSelecc)){//(2.1) FILTRO POR LOCALIDAD
+                    listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+                }
+                else if( localidadSelecc.equals("Todas")){//(2.2) FILTRO POR LOCALIDAD ("Todas")
+                    listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+                }
+            }else if(opcion.equals("Todos")){//(1.2) FILTRO POR TIPO ("Todos")
+                if( a.getLocalidad().equals(localidadSelecc)){//(2.1) FILTRO POR LOCALIDAD
+                    listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+                }
+                else if( localidadSelecc.equals("Todas")){//(2.2)FILTRO POR LOCALIDAD ("Todas")
+                    listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+                }
             }
         }
 
-        if(ascDescSelecc.toString()!="Ascendente"){
+        if(ascDescSelecc.toString()!="Ascendente"){// (3)FILTRO POR ASCENDENTE/DESCENDENTE
             Collections.reverse(listItems);
        }
 

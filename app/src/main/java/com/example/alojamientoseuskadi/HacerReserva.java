@@ -61,7 +61,7 @@ public class HacerReserva extends AppCompatActivity {
         setContentView(R.layout.activity_hacer_reserva);
 
         //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
-        // idAlojSeleccionado =getIntent().getStringExtra("idAlojSeleccionado");
+        String idAlojSeleccionado =getIntent().getStringExtra("idAlojSeleccionado");
         String nombreAlojamiento = getIntent().getStringExtra("nombreAlojSeleccionado");
         String descripcionAlojSeleccionado = getIntent().getStringExtra("descripcionAlojSeleccionado");
         String localidadAlojSeleccionado = getIntent().getStringExtra("localidadAlojSeleccionado");
