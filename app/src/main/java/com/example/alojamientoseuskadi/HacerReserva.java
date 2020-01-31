@@ -44,7 +44,7 @@ public class HacerReserva extends AppCompatActivity {
     TextView localidadAloj;
     TextView emailAloj;
     TextView webAloj;
-    Integer idAlojSeleccionado=78;
+    Integer idAlojSeleccionado;
 
 
     //Declaración de variables
@@ -61,7 +61,7 @@ public class HacerReserva extends AppCompatActivity {
         setContentView(R.layout.activity_hacer_reserva);
 
         //para recuperar los datos que nos hemos pasado de la actividad anterior (VerTareas)
-        String idAlojSeleccionado =getIntent().getStringExtra("idAlojSeleccionado");
+        //String idAlojSeleccionado =getIntent().getStringExtra("idAlojSeleccionado");
         String nombreAlojamiento = getIntent().getStringExtra("nombreAlojSeleccionado");
         String descripcionAlojSeleccionado = getIntent().getStringExtra("descripcionAlojSeleccionado");
         String localidadAlojSeleccionado = getIntent().getStringExtra("localidadAlojSeleccionado");
@@ -297,6 +297,29 @@ public class HacerReserva extends AppCompatActivity {
                         reservas = 1;
                     }
                 }
+                st.close();
+                rs.close();
+
+                String queryCodAloja = "SELECT cCodAlojamiento FROM tAlojamientos WHERE cNombre = '" + nombreAloj.getText() +"'";
+                // create the java statement
+                st = con.createStatement();
+
+                // execute the query, and get a java resultset
+                rs = st.executeQuery(queryCodAloja);
+
+                while (rs.next()) {
+
+                    try {
+
+                        idAlojSeleccionado = rs.getInt("cCodAlojamiento");
+                        //idAlojSeleccionado = reservas + 1;
+
+
+                    } catch (SQLException e) {
+                        reservas = 1;
+                    }
+                }
+
                 st.close();
                 rs.close();
 
