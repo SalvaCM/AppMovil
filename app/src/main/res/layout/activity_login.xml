@@ -50,10 +50,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="64dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/boton"
         android:enabled="true"
         android:onClick="iniciar"
         android:text="@string/action_sign_in"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.522"
@@ -67,10 +68,11 @@
         android:layout_height="50dp"
         android:layout_gravity="start"
         android:layout_marginTop="87dp"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/boton"
         android:enabled="true"
         android:onClick="registrarse"
         android:text="@string/action_registrarse"
+        android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
@@ -95,16 +97,6 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <TextView
-        android:id="@+id/tv_test_json"
-        android:layout_width="215dp"
-        android:layout_height="119dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
-
-    <TextView
         android:id="@+id/txtErrorUsu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -116,5 +108,17 @@
         app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contraseña" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="126dp"
+        android:layout_height="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.48"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069"
+        app:srcCompat="@drawable/log" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

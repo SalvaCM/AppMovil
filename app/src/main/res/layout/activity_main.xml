@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnVerAlojamientos"
         android:layout_width="250dp"
         android:layout_height="62dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:onClick="verAlojamientos"
         android:text="@string/opcion_menu1"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -23,6 +25,7 @@
         android:id="@+id/btnVerReservas2"
         android:layout_width="250dp"
         android:layout_height="62dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:onClick="verMapa"
         android:text="@string/opcion_menu3"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,6 +39,7 @@
         android:id="@+id/btnCerrarSesion"
         android:layout_width="250dp"
         android:layout_height="62dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:onClick="cerrarSesion"
         android:text="@string/opcion_menu5"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -97,6 +101,7 @@
         android:id="@+id/btnVerReservas"
         android:layout_width="250dp"
         android:layout_height="62dp"
+        android:background="@drawable/common_google_signin_btn_icon_dark_normal_background"
         android:onClick="verReservas"
         android:text="@string/opcion_menu2"
         app:layout_constraintBottom_toBottomOf="parent"

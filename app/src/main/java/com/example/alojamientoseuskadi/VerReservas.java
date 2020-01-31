@@ -27,6 +27,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class VerReservas extends AppCompatActivity {
@@ -75,16 +76,32 @@ public class VerReservas extends AppCompatActivity {
     String fechaEntrada ;
     String fechaSalida;
 
+    //ListView Reservas con adapter:
+    private ListView lvItems;
+    private AdaptadorReservas adaptador;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_reservas);
         new ConnectMySqlBBDD().execute(" Estos Strings van a variableNoUsada que no usaremos en este ejemplo y podiamos haber declarado como Void "," si lo necesitaramos podemos cambiar el String por otro tipo de datos "," podemos añadir más de 4 datos que los de este ejemplo, todos los que necesitemos "," y recuerda que se usan como un array, para acceder en concreto a este usaríamos variableNoUsada[3] "); //Arrancamos el AsyncTask. el método "execute" envía datos directamente a doInBackground()
 
-
         mostrarTodasLasReservas();
+
+        lvItems = findViewById(R.id.lvItems);
+        adaptador = new AdaptadorReservas(GetArrayItems(), this );
+        lvItems.setAdapter(adaptador);
+
     }
 
+    private ArrayList<EntidadReservas> GetArrayItems(){
+        ArrayList<EntidadReservas> listItems = new ArrayList<>();
+        for (Alojamiento a : listaAlojamientos) {
+            listItems.add(new EntidadReservas(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+   }
+
+        return listItems;
+    }
     private class ConnectMySqlBBDD extends AsyncTask<String, Void, List<Reserva> > {
         private boolean cancelarSiHayMas100Archivos;
         private ProgressBar miBarraDeProgreso;
