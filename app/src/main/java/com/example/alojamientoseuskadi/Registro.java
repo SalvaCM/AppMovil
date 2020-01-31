@@ -129,7 +129,7 @@ public class Registro extends AppCompatActivity {
                 prest.execute();
                 registrado = "si";
                 con.close();
-                //erorres que pueden dar
+                //errores que pueden dar
             } catch (ClassNotFoundException e) {
 
                 registrado = "no";

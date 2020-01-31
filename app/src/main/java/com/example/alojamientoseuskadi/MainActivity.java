@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -62,5 +63,22 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //FIN Menu ActionBar
 
+    public void verAlojamientos(View view){
+        Intent i = new Intent(this,VerAlojamientos.class);
+        startActivity(i);
+    }
+    public void verReservas(View view){
+        Intent i = new Intent(this,VerReservas.class);
+        startActivity(i);
+    }
+    public void verMapa(View view){
+        Intent i = new Intent(this, Mapa.class);
+        startActivity(i);
+    }
+    public void cerrarSesion(View view){
+        Intent i = new Intent(this, Login.class);
+        startActivity(i);
+    }
 }
