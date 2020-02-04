@@ -145,6 +145,7 @@ public class Mapa extends FragmentActivity implements OnMapReadyCallback, Google
                       // .icon(BitmapDescriptorFactory.fromResource(android.R.drawable.ic_menu_compass))
                         .anchor(0.5f, 0.5f));
 
+
                 irAHacerReserva();
 
                 //Botón 10km

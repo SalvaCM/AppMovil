@@ -7,13 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -37,6 +36,8 @@ public class VerAlojamientos extends AppCompatActivity {
 
     //lista (ListView) personalizado:
     private ListView lvItems;
+    public EditText textView15;
+
     private Adaptador adaptador;
     private ArrayList<Entidad> arrayEntidad;
 
@@ -45,12 +46,12 @@ public class VerAlojamientos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ver_alojamientos);
 
-        //Se cargan los datos de los alojamientos:
+        //Se cargan los datos de los alojamientos:s
         cargarDatosAlojamientos();
 
         //lista (ListView) personalizado:
         lvItems = (ListView) findViewById(R.id.lvItems);
-
+        textView15=(EditText)findViewById(R.id.textView15);
         //Spiner para tipo de alojamiento (1):
         Spinner spinner = (Spinner) findViewById(R.id.spinnerTipoAloj);
         String[] letra = {"Todos","Albergue","Rural","Camping"};
@@ -124,7 +125,7 @@ public class VerAlojamientos extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?>parent, View view, int position, long id){
                 Intent i = new Intent(VerAlojamientos.this, HacerReserva.class);
-               //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
+                //Se le pasa a la Actividad: Hacer reserva los datos del hotel seleccionado:
                 i.putExtra("idAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getcodAlojamiento());
                 i.putExtra("nombreAlojSeleccionado", GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getTitulo());
                 i.putExtra("descripcionAlojSeleccionado",GetArrayItemsFiltrado(tipoAlojSelecc).get(position).getDesc());
@@ -156,11 +157,15 @@ public class VerAlojamientos extends AppCompatActivity {
                     listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
                 }
             }
+            if(a.getNombre().equals(opcion)){
+                listItems.add(new Entidad(a.getCodAlojamiento(), R.drawable.imgcasa, a.getNombre(), a.getLocalizacion(),a.getTelefono(), a.getWeb(), a.getDescripcion(), a.getLocalidad(), a.getEmail()));
+
+            }
         }
 
         if(ascDescSelecc.toString()!="Ascendente"){// (3)FILTRO POR ASCENDENTE/DESCENDENTE
             Collections.reverse(listItems);
-       }
+        }
 
         adaptador = new Adaptador(listItems,this);
         lvItems.setAdapter(adaptador);
@@ -187,6 +192,17 @@ public class VerAlojamientos extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+    public void buscar(View view){
+
+        //tipoAlojSelecc = (String) textView15.getText().toString();
+
+
+        //Se cargan los datos de los alojamientos Filtrados por tipo:
+        GetArrayItemsFiltrado(textView15.getText().toString());
+    }
+
+
+
 
     public void irAHacerReserva(View view){
         Toast toast1 = Toast.makeText(getApplicationContext(), "botón Reservar pulsado", Toast.LENGTH_SHORT);
@@ -197,40 +213,5 @@ public class VerAlojamientos extends AppCompatActivity {
         Intent i = new Intent(this, HacerReserva.class);
         startActivity(i);
     }
-    //Menu ActionBar
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menuopciones, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id==R.id.opcion1) {
-            Intent i = new Intent(this,VerAlojamientos.class);
-            startActivity(i);
-        }
-        if (id==R.id.opcion2) {
-            Intent i = new Intent(this,VerReservas.class);
-            startActivity(i);
-        }
-        if (id==R.id.opcion3) {
-            Intent i = new Intent(this, Mapa.class);
-            startActivity(i);
-        }
-        if (id==R.id.opcion4) {
-            //redirect user to app Settings
-            Intent i = new Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-            i.addCategory(Intent.CATEGORY_DEFAULT);
-            i.setData(Uri.parse("package:" + getPackageName()));
-            startActivity(i);
-        }
-        if (id==R.id.opcion5) {
-            Intent i = new Intent(this, Login.class);
-            startActivity(i);
-        }
 
-        return super.onOptionsItemSelected(item);
-    }
-    //FIN Menu ActionBar
 }
